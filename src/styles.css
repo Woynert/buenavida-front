@@ -1,1 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root{
+	--header-height: 50px;
+	--sidebar-width: 200px;
+}
+
+*{
+	font-family: WorkSans-Regular,Helvetica,Arial,sans-serif;
+    box-sizing: border-box;
+}
+
+body, html{
+    margin: 0;
+    padding: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.CA{
+	background: orange;
+}
+
+.CB{
+	background: purple;
+}
+
+.CC{
+	background: green;
+}
+
+.CD{
+	background: maroon;
+}
