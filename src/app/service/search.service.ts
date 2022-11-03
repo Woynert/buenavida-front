@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '@environment';
+
 import { Product } from '@shared/interface';
 
 @Injectable({
@@ -13,6 +15,6 @@ export class SearchService {
   ) { }
 
   makeSearch(): Observable<Product[]> {
-	  return this.http.get<Product[]>("http://127.0.0.1:8070/store")
+	  return this.http.get<Product[]>(`${environment.HOSTAPI}/store`)
   }
 }
