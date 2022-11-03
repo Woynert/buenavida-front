@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../interface';
-import { SearchService } from '../search.service';
+
+import { Product } from '@shared/interface';
+import { SearchService } from '@service/search.service';
 
 @Component({
 	selector: 'app-view-vitrina',
