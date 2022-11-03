@@ -9,6 +9,7 @@ import { ViewCartComponent } from './view-cart/view-cart.component';
 import { ViewLoginComponent } from './view-login/view-login.component';
 import { ViewSigninComponent } from './view-signin/view-signin.component';
 import { VitrinaFilterComponent } from './vitrina-filter/vitrina-filter.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { VitrinaFilterComponent } from './vitrina-filter/vitrina-filter.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+	HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
