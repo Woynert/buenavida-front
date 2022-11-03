@@ -1,9 +1,18 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class SessionService {
 
-  constructor() { }
+	constructor() { }
+
+	// endpoints
+	// /session/login
+	// /session/signin
+	// /session/refresh
+	//
+	// other
+	// checksession
+	//
 }
