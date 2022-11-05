@@ -37,7 +37,6 @@ export class ViewLoginComponent implements OnInit {
 
     let conditional = true;
     let regex_email = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
-    let regex_password = new RegExp('(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}')
     let captcha = this.captchaService.validateCaptcha(this.reCaptcha);
     
     this.pass_msg = "";
@@ -54,9 +53,6 @@ export class ViewLoginComponent implements OnInit {
             this.error_psw = "Please enter your password";
             conditional = false;
             console.log(this.error_psw);
-        } else if (regex_password.test(this.password) == false){
-            this.error_psw = "Must have a minimum of 8 characters, at least one number, one special character, one uppercase letter and one lowercase letter"
-            conditional = false;
         }
         if(conditional == true){
           this.pass_msg = "Entering";

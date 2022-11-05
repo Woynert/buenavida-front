@@ -49,10 +49,12 @@ export class ViewSigninComponent implements OnInit {
 
     let conditional = true;
     let regex_email = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
-    let regex_password = new RegExp('(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}')
+    let regex_password = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})')
     this.pass_msg = "";
 
     let captcha = this.captchaService.validateCaptcha(this.reCaptcha);
+
+    console.log(this.password);
 
     if (captcha == true) {
         if (this.name === '') {
