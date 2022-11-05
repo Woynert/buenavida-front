@@ -3,11 +3,48 @@
 <div class="mainVitrinaParent">
 	<div class="mainVitrina CC">
 		
-		Lorem ipsum dolor sit amet. Aut numquam odit et repudiandae repellat et repellat impedit ad similique neque est voluptatibus quaerat. At voluptas illum sed doloremque labore rem temporibus dolores et nemo error et provident omnis. Qui earum rerum et expedita sapiente At blanditiis rerum sit asperiores quia sit recusandae nulla. Eum vitae numquam id obcaecati voluptates qui fuga consequatur.
+				<div class="vitrina__container">
 
-		<p *ngFor="let product of products">
-			{{ product.title }}
-		</p>
+					<!--vitrina item container-->
+					<div class="vitrina__grid" id="vitrina__grid">
+
+						<!--base vitrina item-->
+						<div *ngFor="let product of products" class="vitrina__item" id="vitrina__item">
+							<div class="vitrina__item__container1">
+								<div class="vitrina__item__container2">
+									<div class="vitrina__item__favoriteButton">
+										<img class="vitrina__item__favoriteIcon" src="/assets/icon/heart.svg"/>
+									</div>
+									<div class="vitrina__item__discount"><div>{{product.discount}}%</div></div>
+									<div class="vitrina__item__imgContainer">
+										<img class="vitrina__item__img" [src]="product.imageurl"/>
+									</div>
+									<div class="vitrina__item__title">{{product.title}}</div>
+									<div class="vitrina__item__units">{{product.units}}</div>
+									<div class="vitrina__item__price">{{product.price}} €</div>
+									<div class="vitrina__item__buyButton">
+										<img class="vitrina__item__favoriteIcon" src="/assets/icon/bag-plus-fill.svg"/>
+										Añadir a la cesta
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="vitrina__pageControls">
+						<div class="vitrina__pageControls__container">
+							<div class="vitrina__pageButton" id="vitrina__pageButtonLeft">
+								<div class="vitrina__pageButton__container"><</div>
+							</div><!--
+							--><div class="vitrina__pageControlNumbers" id="vitrina__pageControlNumbers">
+							</div><!--
+							--><div class="vitrina__pageButton" id="vitrina__pageButtonRight">
+								<div class="vitrina__pageButton__container">></div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 	</div>
 </div>

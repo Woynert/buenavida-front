@@ -34,14 +34,6 @@
 	width: 350px;
 }
 
-/*.searchBar__input*/
-/*.searchBar__input::focus-visible*/
-/*.searchBar__input::selection*/
-/*{*/
-	/*border-width: 0;*/
-	/*border-style: none;*/
-/*}*/
-
 .searchBar__input {
 	border-top-style: hidden;
 	border-right-style: hidden;

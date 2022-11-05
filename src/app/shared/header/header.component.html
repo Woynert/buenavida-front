@@ -2,8 +2,8 @@
 	<img class="header__logo C2" src="/assets/logo.jpg"/>
 	<div class="header__container">
 
-		<div class="searchBar">
-			<input type="text" placeholder="Buscar" class="searchBar__input">
+		<div class="searchBar" (click)="focusSearchBar()">
+			<input type="text" placeholder="Buscar" class="searchBar__input" #searchBarInput>
 			<div class="searchBar__icon">
 				<img src="/assets/icon/search.svg">
 			</div>

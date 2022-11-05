@@ -7,5 +7,6 @@ export interface Product {
 	discount:     number;
 	priceperunit: string;
 	description:  string;
+	imageurl:     string;
 	score:        number;
 }
