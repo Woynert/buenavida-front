@@ -1,37 +1,37 @@
 <!-- SignIn Form -->
 
 <div class="content">
-    <div class="form_signup">
-        <h1>SignIn In</h1>
+	<div class="form_signup">
+		<h1>SignIn In</h1>
 
-        <h2>Create new account</h2>
-        <input type="text" id="name" class="input_signin" [(ngModel)]="name" placeholder="Name" required>
-        <p class="mesage_error" id="error_name">{{error_name}}</p>
-        <input type="text" id="lastname" class="input_signin" [(ngModel)]="lastname" placeholder="Lastname" required>
-        <p class="mesage_error" id="error_lastname">{{error_lastname}}</p>
-        <h2>Login Information</h2>
-        <input type="email" id="email" class="input_signin" [(ngModel)]="email" placeholder="Email" required>
-        <p class="mesage_error" id="error_email">{{error_email}}</p>
-        <input type="password"  id="psw" class="input_signin" [(ngModel)]="password" placeholder="Password" required>
-        <p class="mesage_error" id="error_psw">{{error_password}}</p>
-        <input type="password"  id="confirm_psw" class="input_signin" [(ngModel)]="password_again" placeholder="Confirm Password" required>
-        <p class="mesage_error" id="error_confirm_psw">{{error_password_again}}</p>
-        <p class="mesage_pass" id="pass_validation">{{pass_msg}}</p>
-        <p class="mesage_pws" id="mesage_pws">{{mesage_pws}}</p>
+		<h2>Create new account</h2>
+		<input type="text" id="name" class="input_signin" [(ngModel)]="name" placeholder="Name" required>
+		<p class="mesage_error" id="error_name">{{error_name}}</p>
+		<input type="text" id="lastname" class="input_signin" [(ngModel)]="lastname" placeholder="Lastname" required>
+		<p class="mesage_error" id="error_lastname">{{error_lastname}}</p>
+		<h2>Login Information</h2>
+		<input type="email" id="email" class="input_signin" [(ngModel)]="email" placeholder="Email" required>
+		<p class="mesage_error" id="error_email">{{error_email}}</p>
+		<input type="password"  id="psw" class="input_signin" [(ngModel)]="password" placeholder="Password" required>
+		<p class="mesage_error" id="error_psw">{{error_password}}</p>
+		<input type="password"  id="confirm_psw" class="input_signin" [(ngModel)]="password_again" placeholder="Confirm Password" required>
+		<p class="mesage_error" id="error_confirm_psw">{{error_password_again}}</p>
+		<p class="mesage_pass" id="pass_validation">{{pass_msg}}</p>
+		<p class="mesage_pws" id="mesage_pws">{{mesage_pws}}</p>
 
-        <div class="container_captcha">
-            <div class="captcha">{{captcha}}</div>
-            <br>
-            <br>
-            <div class="input_captcha">
-                <input type="text" name="reCaptcha" id="reCaptcha" [(ngModel)]="reCaptcha" placeholder="Write the Captcha"/>
-            </div>
-            
-        </div>
-        <div id="errCaptcha" class="errmsg">{{error_captcha}}</div>
-        <br>
-        <button id="button_signup" class="access" (click)="access()">Access</button>
-        <br>
-        <button class="access_facebook">Access with Facebook</button>
-    </div>
+		<div class="container_captcha">
+			<div class="captcha">{{captcha}}</div>
+			<br>
+			<br>
+			<div class="input_captcha">
+				<input type="text" name="reCaptcha" id="reCaptcha" [(ngModel)]="reCaptcha" placeholder="Write the Captcha"/>
+			</div>
+
+		</div>
+		<div id="errCaptcha" class="errmsg">{{error_captcha}}</div>
+		<br>
+		<button id="button_signup" class="access" (click)="access()">Access</button>
+		<br>
+		<button class="access_facebook">Access with Facebook</button>
+	</div>
 </div>

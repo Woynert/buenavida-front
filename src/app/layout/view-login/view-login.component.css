@@ -1,54 +1,54 @@
 .content {
-    max-width: 500px;
-    margin: auto;
+	max-width: 500px;
+	margin: auto;
 }
 
 .form_login{
-    margin-top: 3%;
-    padding-bottom: 3%;
-    border: 1px solid #d4d4d4;
-    padding-left: 5%;
-    padding-right: 5%;
+	margin-top: 3%;
+	padding-bottom: 3%;
+	border: 1px solid #d4d4d4;
+	padding-left: 5%;
+	padding-right: 5%;
 }
 
 .email_div, .password_div{
-    background-color: rgb(247, 246, 250);
-    border: 1px solid #d4d4d4;
-    height: 40px;
-    width: 100%;
+	background-color: rgb(247, 246, 250);
+	border: 1px solid #d4d4d4;
+	height: 40px;
+	width: 100%;
 }
 
 .email, .psw{
-    background: transparent;
-    border: none;
-    width: 80%;
-    outline: none;
-    font-size: 15px;
-    margin-top: 3%;
+	background: transparent;
+	border: none;
+	width: 80%;
+	outline: none;
+	font-size: 15px;
+	margin-top: 3%;
 }
 
 .captcha {
-    display: inline-block;
-    font-family: cursive, sans-serif;
-    font-style: italic;
-    font-weight: bold;
-    font-size: 30px;
-    padding: 3px;
-    border-radius: 5px;
-    text-decoration: line-through;
-    color: #a0a0a0;
-    background-color: #0c0c0c;
-    user-select: none;
-    height: 80%;
-    text-align: center;
-    margin-top: 3px;
+	display: inline-block;
+	font-family: cursive, sans-serif;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 30px;
+	padding: 3px;
+	border-radius: 5px;
+	text-decoration: line-through;
+	color: #a0a0a0;
+	background-color: #0c0c0c;
+	user-select: none;
+	height: 80%;
+	text-align: center;
+	margin-top: 3px;
 }
 
 #reCaptcha{
-    border: 1px solid #d4d4d4;
-    height: 30px;
-    text-align: center;
-    width: 100%;
-    outline: none;
+	border: 1px solid #d4d4d4;
+	height: 30px;
+	text-align: center;
+	width: 100%;
+	outline: none;
 }
-  
+
