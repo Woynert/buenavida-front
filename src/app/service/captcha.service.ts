@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class CaptchaService {
 
   public captcha: Array<any>;
+  public message_error: string = '';
 
   constructor() { 
     this.captcha = [];
@@ -20,39 +21,25 @@ export class CaptchaService {
           this.captcha[i] = Math.floor(Math.random() * 10 + 0);
         }
     }
-
-    let theCaptcha = this.captcha.join("");
-
-    let activeCaptcha = document.getElementById("captcha") as HTMLDivElement; 
-  
-    if (activeCaptcha != null) {
-      activeCaptcha.innerHTML = theCaptcha;
-    }
   }
 
   //Check captcha content
-  validateCaptcha(): boolean {
-    let errCaptcha = document.getElementById("errCaptcha");
-    let reCaptcha = document.getElementById("reCaptcha") as HTMLInputElement;
-    let recaptcha = reCaptcha.value;
+  validateCaptcha(recaptcha:any): boolean {
     let validateCaptcha = 0;
-    if (errCaptcha != null){
-      errCaptcha.innerHTML = "";
-      for (var z = 0; z < 6; z++) {
-          if (recaptcha.charAt(z) != this.captcha[z]) {
-              validateCaptcha++;
-          }
-      }
-      if (recaptcha == "") {
-          errCaptcha.innerHTML = "Debe completar el Captcha";
-          return false;
-      } else if (validateCaptcha > 0 || recaptcha.length > 6) {
-          errCaptcha.innerHTML = "Captcha Incorrecto";
-          return false;
-      } else {
-          return true;
+    this.message_error = "";
+    for (var z = 0; z < 6; z++) {
+        if (recaptcha.charAt(z) != this.captcha[z]) {
+            validateCaptcha++;
       }
     }
-    return false;
+    if (recaptcha == "") {
+        this.message_error = "You must complete the Captcha";
+        return false;
+    } else if (validateCaptcha > 0 || recaptcha.length > 6) {
+        this.message_error = "Incorrect captcha";
+        return false;
+    } else {
+        return true;
+    }
   }
 }

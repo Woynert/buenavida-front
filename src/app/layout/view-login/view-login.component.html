@@ -8,30 +8,30 @@
 
         <div class="email_div">
             <!--<img src="./eco-tienda-info/src-eco-tienda/person-fill.svg" class="img_form">-->
-            <input type="email" id="email" class="email" placeholder="Email" required>
+            <input type="email" class="email" [(ngModel)]="email" placeholder="Email" required>
         </div>
-        <p class="mesage_error" id="error_email"></p>
+        <p class="mesage_error" >{{error_email}}</p>
         <div class="password_div">
             <!--<img src="./eco-tienda-info/src-eco-tienda/envelope-fill.svg" class="img_form">-->
-            <input type="password" id="psw" class="psw" placeholder="Password" required>
+            <input type="password" [(ngModel)]="password" class="psw" placeholder="Password" required>
         </div>
-        <p class="mesage_error" id="error_psw"></p>
+        <p class="mesage_error">{{error_psw}}</p>
         <div class="container_captcha">
-            <div id="captcha" class="captcha"></div>
+            <div class="captcha">{{captcha}}</div>
             <br>
             <br>
             <div class="input_captcha">
-                <input type="text" name="reCaptcha" id="reCaptcha" placeholder="Write the Captcha"/>
+                <input type="text" id="reCaptcha" name="reCaptcha" [(ngModel)]="reCaptcha" placeholder="Write the Captcha"/>
             </div>
         </div>
-        <p class="mesage_pass" id="pass_validation"></p>
-        <div id="errCaptcha" class="errmsg"></div>
+        <p class="mesage_pass">{{pass_msg}}</p>
+        <div id="errCaptcha" class="errmsg">{{error_captcha}}</div>
         <button id="button_login" class="access" (click)="access()">Access</button>
         <button class="access_facebook">Access with Facebook</button>
         <div class="forget_password_div">
             <a><p>Have you forgotten your password?</p></a>
         </div>
-        <p>Aren't you registered?<a href="#" class="go_signup">Create an account</a></p>
+        <p>Aren't you registered?<a routerLink="/signin" class="go_signup">Create an account</a></p>
         
     </div>
 

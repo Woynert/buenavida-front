@@ -9,14 +9,20 @@ import { CaptchaService } from '@service/captcha.service';
 })
 export class ViewLoginComponent implements OnInit {
 
+  public email:string = "";
+  public reCaptcha:string = "";
+  public password:string = "";
+  public error_psw:string = "";
+  public error_email:string = "";
+  public error_captcha:string = "";
+  public pass_msg:string = "";
+  public captcha:string = "";
 
   constructor(private captchaService: CaptchaService) { 
     const checkDiv = setInterval(() => {
       this.captchaService.createCaptcha();
-      let activeCaptcha = document.getElementById("captcha") as HTMLDivElement; 
-      if (activeCaptcha != null) {
-        clearInterval(checkDiv);
-      }
+      this.captcha = this.captchaService.captcha.join("");
+      clearInterval(checkDiv);
     }, 500);
   }
 
@@ -25,70 +31,38 @@ export class ViewLoginComponent implements OnInit {
 
   //Validate Form
   access() {
-    let mesages_hide = Array.from(document.getElementsByClassName("mesage_error") as HTMLCollectionOf<HTMLElement>); 
-    mesages_hide.forEach((element) => {
-      if (element != null){
-        element.innerHTML = "";
-      }
-    });
+    this.error_psw = "";
+    this.error_email = "";
+    this.error_captcha = "";
 
-    let email = document.getElementById("email") as HTMLInputElement;
-    let text_email:string = "";
-    if (email != null){
-      text_email = email.value;
-    }
-    let psw = document.getElementById("psw") as HTMLInputElement;
-    let text_psw:string = "";
-    if (psw != null){
-      text_psw = psw.value;
-    }
     let conditional = true;
     let regex_email = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
     let regex_password = new RegExp('(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}')
-    let captcha = this.captchaService.validateCaptcha();
-    let pass = document.getElementById("pass_validation");
-    if (pass != null) {
-      pass.innerHTML = "";
-    }
+    let captcha = this.captchaService.validateCaptcha(this.reCaptcha);
+    
+    this.pass_msg = "";
 
     if (captcha == true) {
-        if (text_email === '') {
-            let error = document.getElementById("error_email");
-            if (error != null) {
-              error.innerHTML = "Please enter your email";
-              error.style.display = "block";
-            }
+        if (this.email === '') {
+            this.error_email  = "Please enter your email";
             conditional = false;
-        } else if (regex_email.test(text_email) == false){
-            let error = document.getElementById("error_email");
-            if (error!= null) {
-              error.innerHTML = "Please enter a valid email";
-              error.style.display = "block";
-            }
+        } else if (regex_email.test(this.email) == false){
+            this.error_email = "Please enter a valid email"
             conditional = false;
         }
-        if (text_psw === '') {
-            let error = document.getElementById("error_psw");
-            if (error!= null) {
-              error.innerHTML = "Please enter your password";
-              error.style.display = "block";
-            }
+        if (this.password === '') {
+            this.error_psw = "Please enter your password";
             conditional = false;
-        } else if (regex_password.test(text_psw) == false){
-            let error = document.getElementById("error_psw");
-            if (error!= null) {
-              error.innerHTML = "Must have a minimum of 8 characters, at least one number, one special character, one uppercase letter and one lowercase letter";
-              error.style.display = "block";
-            }
+            console.log(this.error_psw);
+        } else if (regex_password.test(this.password) == false){
+            this.error_psw = "Must have a minimum of 8 characters, at least one number, one special character, one uppercase letter and one lowercase letter"
             conditional = false;
         }
         if(conditional == true){
-            let pass = document.getElementById("pass_validation");
-            if (pass != null) {
-              pass.innerHTML = "Entering";
-              pass.style.display = "block";
-            }
+          this.pass_msg = "Entering";
         }
-    } 
+    }else{
+      this.error_captcha = this.captchaService.message_error;
+    }
   }
 }
