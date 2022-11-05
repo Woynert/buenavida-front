@@ -1,1 +1,38 @@
-<p>view-login works!</p>
+<!-- Login Form -->
+
+<div class="content">
+
+    <div class="form_login">
+
+        <h1>Log In</h1>
+
+        <div class="email_div">
+            <!--<img src="./eco-tienda-info/src-eco-tienda/person-fill.svg" class="img_form">-->
+            <input type="email" id="email" class="email" placeholder="Email" required>
+        </div>
+        <p class="mesage_error" id="error_email"></p>
+        <div class="password_div">
+            <!--<img src="./eco-tienda-info/src-eco-tienda/envelope-fill.svg" class="img_form">-->
+            <input type="password"  id="psw" class="psw" placeholder="Contraseña" required>
+        </div>
+        <p class="mesage_error" id="error_psw"></p>
+        <div class="container_captcha">
+            <div id="captcha" class="captcha"></div>
+            <br>
+            <br>
+            <div class="input_captcha">
+                <input type="text" name="reCaptcha" id="reCaptcha" placeholder="Escribir el Captcha"/>
+            </div>
+        </div>
+        <p class="mesage_pass" id="pass_validation"></p>
+        <div id="errCaptcha" class="errmsg"></div>
+        <button id="button_login" class="access" (click)="access()">Accede</button>
+        <button class="access_facebook">Accede con Facebook</button>
+        <div class="forget_password_div">
+            <a><p>¿Has olvidado tu contraseña?</p></a>
+        </div>
+        <p>¿No estas registrado?<a href="signup.html" class="go_signup">Crea una cuenta</a></p>
+        
+    </div>
+
+</div>
