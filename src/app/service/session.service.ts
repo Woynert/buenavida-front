@@ -4,18 +4,14 @@ import { Observable } from 'rxjs';
 import { environment } from '@environment';
 
 import { SignInI } from '@shared/signinI';
-
-interface Message {
-    message: string;
-}
-
+import { LogInI } from '@shared/logInI';
+import { MessageI } from '@shared/message';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class SessionService {
 
-	postId:any = "";
+export class SessionService {
 
 	constructor(
 		private http: HttpClient
@@ -26,9 +22,14 @@ export class SessionService {
 	// /session/signin
 	
 
-	signIn(form: SignInI): Observable<any> {
+	signIn(form: SignInI): Observable<MessageI> {
 		const body=JSON.stringify(form);
-		return this.http.post<any>(`${environment.HOSTAPI}/session/signin`, body)
+		return this.http.post<MessageI>(`${environment.HOSTAPI}/session/signin`, body)
+	}
+
+	logIn(form: LogInI): Observable<MessageI> {
+		const body=JSON.stringify(form);
+		return this.http.post<MessageI>(`${environment.HOSTAPI}/session/login`, body)
 	}
 
 	// /session/refresh

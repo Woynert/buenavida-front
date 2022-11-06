@@ -113,7 +113,7 @@ export class ViewSigninComponent implements OnInit {
                           this.mesage_pws = "";
                           clearInterval(checkMessagePost);
                           if (this.signin) {
-                            this.pass_msg += " in 5 minutes you will be redirected to LogIn Page";
+                            this.pass_msg += " in 5 seconds you will be redirected to LogIn Page";
                             setTimeout(() => {
                               this.router.navigate(['/login']);
                             }, 5000);

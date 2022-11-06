@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { CaptchaService } from '@service/captcha.service';
+import { SessionService } from '@service/session.service';
 
 @Component({
 	selector: 'app-view-login',
@@ -17,8 +19,12 @@ export class ViewLoginComponent implements OnInit {
 	public error_captcha:string = "";
 	public pass_msg:string = "";
 	public captcha:string = "";
+	public message:string = "";
+	public logIn:boolean = false;
 
-	constructor(private captchaService: CaptchaService) { 
+	constructor(private captchaService: CaptchaService,
+		private sessionService: SessionService,
+    	private router: Router) { 
 		const checkDiv = setInterval(() => {
 			this.captchaService.createCaptcha();
 			this.captcha = this.captchaService.captcha.join("");
@@ -31,6 +37,9 @@ export class ViewLoginComponent implements OnInit {
 
 	//Validate Form
 	access() {
+		/*let form = {"email": "mario@pipe.co",
+                    		"password":"superpass"};*/
+		
 		this.error_psw = "";
 		this.error_email = "";
 		this.error_captcha = "";
@@ -54,7 +63,28 @@ export class ViewLoginComponent implements OnInit {
 				conditional = false;
 			}
 			if(conditional == true){
-				this.pass_msg = "Entering";
+				let form = {"email": this.email,
+                    		"password":this.password};
+
+				this.sessionService.logIn(form).subscribe({
+								next: data => {
+									this.message = data.message;
+									this.logIn = true;
+								},
+								error: error => {
+									this.message = error.error.message;
+									this.logIn = false;
+								}});
+
+				const checkMessagePost = setInterval(() => {if (this.message != ""){
+									this.pass_msg = this.message;
+									clearInterval(checkMessagePost);
+									if (this.logIn) {
+										this.router.navigate(['/']);
+									}
+									
+								  }
+								}, 500);
 			}
 		}else{
 			this.error_captcha = this.captchaService.message_error;
