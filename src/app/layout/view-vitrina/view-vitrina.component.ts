@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Product } from '@shared/interface';
-import { SearchService } from '@service/search.service';
+import { SearchService, SearchResponse } from '@service/search.service';
 
 @Component({
 	selector: 'app-view-vitrina',
@@ -11,6 +11,7 @@ import { SearchService } from '@service/search.service';
 export class ViewVitrinaComponent implements OnInit {
 
 	products: Product[] = [];
+	totalProducts: number = 0;
 
 	constructor(
 		private searchService: SearchService
@@ -21,8 +22,10 @@ export class ViewVitrinaComponent implements OnInit {
 	}
 
 	getProductsFromSearch(): void {
-		this.searchService.makeSearch()
-			.subscribe(products => this.products = products);
+		this.searchService.makeSearch().subscribe((res) => {
+			this.products      = res.products;
+			this.totalProducts = res.totalcount;
+		});
 	}
 
 }

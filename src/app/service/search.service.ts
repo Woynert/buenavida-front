@@ -6,15 +6,24 @@ import { environment } from '@environment';
 import { Product } from '@shared/interface';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
+
 export class SearchService {
 
-  constructor(
-	  private http: HttpClient
-  ) { }
+	constructor(
+		private http: HttpClient
+	) { }
 
-  makeSearch(): Observable<Product[]> {
-	  return this.http.get<Product[]>(`${environment.HOSTAPI}/store`)
-  }
+	makeSearch(): Observable<SearchResponse> {
+
+		//let res = this.http.get<SearchResponse[]>(`${environment.HOSTAPI}/store`)
+		//return res.products
+		return this.http.get<SearchResponse>(`${environment.HOSTAPI}/store`)
+	}
+}
+
+export interface SearchResponse {
+	totalcount: number;
+	products:   Product[];
 }
