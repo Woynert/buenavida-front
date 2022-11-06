@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { CaptchaService } from '@service/captcha.service';
+import { SessionService } from '@service/session.service';
 
 @Component({
 	selector: 'app-view-signin',
@@ -24,8 +26,12 @@ export class ViewSigninComponent implements OnInit {
 	public password_again:string = "";
 	public pass_msg:string = "";
 	public mesage_pws:string = "Must have a minimum of 8 characters, at least one number, one special character, one uppercase letter and one lowercase letter";
+  public message:string = "";
+  public signin:boolean = false;
 
-	constructor(private captchaService: CaptchaService) { 
+	constructor(private captchaService: CaptchaService,
+    private sessionService: SessionService,
+    private router: Router) { 
 		const checkDiv = setInterval(() => {
 			this.captchaService.createCaptcha();
 			this.captcha = this.captchaService.captcha.join("");
@@ -85,8 +91,36 @@ export class ViewSigninComponent implements OnInit {
 				conditional = false;
 			}
 			if(conditional == true){
-				this.pass_msg = "Registered";
-				this.mesage_pws = "";
+				
+        let form = {"firstname": this.name,
+                    "lastname": this.lastname,
+                    "email": this.email,
+                    "password":this.password,
+                    "passwordconfirm":this.password_again};
+                    
+        this.sessionService.signIn(form).subscribe({
+                        next: data => {
+                          this.message = data.message;
+                          this.signin = true;
+                        },
+                        error: error => {
+                          this.message = error.error.message;
+                          this.signin = false;
+                        }});
+                    
+        const checkMessagePost = setInterval(() => {if (this.message != ""){
+                          this.pass_msg = this.message;
+                          this.mesage_pws = "";
+                          clearInterval(checkMessagePost);
+                          if (this.signin) {
+                            this.pass_msg += " in 5 minutes you will be redirected to LogIn Page";
+                            setTimeout(() => {
+                              this.router.navigate(['/login']);
+                            }, 5000);
+                          }
+                          
+                        }
+                      }, 500);
 			}
 		}else{
 			this.error_captcha = this.captchaService.message_error;
