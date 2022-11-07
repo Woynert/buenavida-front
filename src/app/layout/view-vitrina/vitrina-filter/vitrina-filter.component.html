@@ -1,1 +1,27 @@
-<p>vitrina-filter works!</p>
+<div class="sidebar__expandable">
+	<div class="sidebar__expandable__header">
+		<div class="sidebar__expandable__header__label">Precio</div>
+		<div class="sidebar__expandable__header__button">
+			<img src="./img/icon/dash.svg">
+		</div>
+	</div>
+	<div class="sidebar__expandable__content" >
+		<div class="doubleRange">
+			<div class="doubleRange__container">
+				<div class="doubleRange__progressBar--background"> </div>
+				<div class="doubleRange__progressBar" #progressBar> </div>
+				<input (input)="updateDoubleRange()" #rangeLeft
+				class="doubleRange__range" [min]="minPrice" [max]="maxPrice" value="20" type="range">
+				<input (input)="updateDoubleRange()" #rangeRight
+				class="doubleRange__range" [min]="minPrice" [max]="maxPrice" max="70" value="60" type="range">
+			</div>
+		</div>
+		<div class="numFilter">
+			<div class="numFilter__label">DESDE</div>
+			<div class="numFilter__label">HASTA</div>
+			<input class="numFilter__valueBox" id="numFilter__left" type="number" min="0" max="70" [value]="leftPrice">
+			<input class="numFilter__valueBox" id="numFilter__right" type="number" min="0" max="70" [value]="rightPrice">
+		</div>
+		<div class="numFilter__submmit" id="numFilter__submmit">Filtrar</div>
+	</div>
+</div>
