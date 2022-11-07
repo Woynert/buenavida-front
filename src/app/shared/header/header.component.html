@@ -2,6 +2,7 @@
 	<img class="header__logo C2" src="/assets/logo.jpg"/>
 	<div class="header__container">
 
+		<!--Search bar-->
 		<div class="searchBar" (click)="focusSearchBar()">
 			<input type="text" placeholder="Buscar" class="searchBar__input"
 				(keyup.enter)="setSearchTerm()"
@@ -14,6 +15,7 @@
 			</div>
 		</div>
 
+		<!--Mis favoritos-->
 		<div class="headerButton">
 			<div class="headerButton__container" id="headerButton__favorites">
 				<div class="headerButton__icon">
@@ -23,6 +25,7 @@
 			</div>
 		</div>
 
+		<!--Mi cuenta-->
 		<div class="headerButton">
 			<div class="headerButton__container" id="headerButton__account">
 				<div class="headerButton__icon">
@@ -32,6 +35,7 @@
 			</div>
 		</div>
 
+		<!--Mi carrito-->
 		<div class="headerButton">
 			<div class="headerButton__container" id="headerButton__cart">
 				<div class="headerButton__icon">

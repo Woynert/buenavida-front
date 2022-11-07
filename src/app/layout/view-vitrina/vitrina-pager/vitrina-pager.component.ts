@@ -32,9 +32,6 @@ export class VitrinaPagerComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
-		console.log("Me",changes, this.totalPages);
-		//this.totalPages  = changes
-		//this.currentPage = 0;
 		this.pagesOffset = 0;
 		this.updateOffset()
 	}
@@ -43,6 +40,8 @@ export class VitrinaPagerComponent implements OnInit, OnChanges {
 		this.currentPage = pageId;
 		this.eventPageSelected.emit(pageId);
 	}
+
+	// movement functions
 
 	updateOffset() {
 		this.pagesArray = [];
@@ -54,13 +53,11 @@ export class VitrinaPagerComponent implements OnInit, OnChanges {
 	goLeft() {
 		this.pagesOffset = Math.max(0, this.pagesOffset-1);
 		this.updateOffset()
-		console.log(this.pagesOffset)
 	}
 
 	goRight() {
 		this.pagesOffset = Math.min(this.totalPages -this.maxBtns, this.pagesOffset+1);
 		this.updateOffset()
-		console.log(this.pagesOffset)
 	}
 
 }

@@ -12,6 +12,7 @@ export interface Product {
 }
 
 // Vitrina apply price filter on product search
+
 export interface iEventApplyPriceFilter {
 	minPrice: number;
 	maxPrice: number;

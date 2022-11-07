@@ -34,13 +34,14 @@
 						<app-vitrina-pager
 							[currentPage]="selectedPage" [totalPages]="totalPages"
 							(eventPageSelected)="eventSelectPage($event)"
-							></app-vitrina-pager>
+						></app-vitrina-pager>
 					</div>
 				</div>
 
 	</div>
 </div>
+
 <app-vitrina-filter
 	class="sidebar CB"
 	(eventApplyPriceFilter)="eventApplyPriceFilter($event)"
-	></app-vitrina-filter>
+></app-vitrina-filter>

@@ -22,7 +22,6 @@ export class HeaderComponent implements OnInit {
 	}
 
 	setSearchTerm(): void {
-		console.log(this.searchBarInput.nativeElement.value);
 		this.searchService.setSearchTerm(this.searchBarInput.nativeElement.value);	
 	}
 

@@ -11,11 +11,15 @@ import { Product } from '@shared/interface';
 
 export class SearchService {
 
+	// Subject variable to share searchTerm with service subscribers
+
 	searchTerm: Subject<string> = new Subject<string>();
 
 	constructor(
 		private http: HttpClient
 	) { }
+
+	// send request to API
 
 	makeSearch(searchTerm: string, minPrice: number, maxPrice: number, pageId: number): Observable<SearchResponse> {
 		return this.http.get<SearchResponse>(

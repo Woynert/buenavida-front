@@ -16,6 +16,8 @@ export class VitrinaFilterComponent implements OnInit, AfterViewInit {
 
 	@Output() eventApplyPriceFilter = new EventEmitter<iEventApplyPriceFilter>();
 
+	// get element reference
+
 	@ViewChild('rangeLeft') rangeLeft!: ElementRef<HTMLInputElement>;
 	@ViewChild('rangeRight') rangeRight!: ElementRef<HTMLInputElement>;
 	@ViewChild('progressBar') progressBar!: ElementRef<HTMLDivElement>;
@@ -28,9 +30,10 @@ export class VitrinaFilterComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		console.log("U")
 		this.updateDoubleRange();
 	}
+
+	// limit movement of range input 
 
 	updateDoubleRange() {
 		let leftPrice  = parseInt(this.rangeLeft.nativeElement.value);
