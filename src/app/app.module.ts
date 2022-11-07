@@ -25,14 +25,15 @@ import { HeaderComponent } from '@shared/header/header.component';
 		ViewLoginComponent,
 		ViewSigninComponent,
 		VitrinaFilterComponent,
-		VitrinaPagerComponent
+		VitrinaPagerComponent,
+		VitrinaFilterComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		HttpClientModule,
+		ReactiveFormsModule,
 		FormsModule,
-		ReactiveFormsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
