@@ -8,6 +8,7 @@
 	<div class="vitrina__pageControlNumbers" id="vitrina__pageControlNumbers">
 		<div
 		*ngFor="let i of pagesArray"
+		[ngClass]="{'vitrina__pageButton--selected' : i == currentPage}"
 		class="vitrina__pageButton">
 			<div
 			(click)="selectPage(i)"

@@ -15,6 +15,12 @@ export class ViewVitrinaComponent implements OnInit {
 	initialPage: number = 0;
 	totalPages: number  = 0;
 
+	searchTerm: string = "";
+	selectedPage: number = 0;
+	minPrice: number = 0;
+	maxPrice: number = 1000;
+
+
 	constructor(
 		public searchService: SearchService
 	) { }
@@ -24,7 +30,8 @@ export class ViewVitrinaComponent implements OnInit {
 	}
 
 	getProductsFromSearch(): void {
-		this.searchService.makeSearch().subscribe((res: SearchResponse) => {
+		this.searchService.makeSearch(this.searchTerm, this.minPrice, this.maxPrice, this.selectedPage)
+		.subscribe((res: SearchResponse) => {
 			this.products      = res.products;
 			this.totalPages    = Math.ceil(res.totalcount / 12); // 12 items per page
 		});
@@ -32,6 +39,9 @@ export class ViewVitrinaComponent implements OnInit {
 	
 	selectPage(pageId: number) {
 		console.log("sel ", pageId)
+		this.selectedPage = pageId;
+
+		this.getProductsFromSearch()
 	}
 
 }

@@ -27,6 +27,7 @@ export class VitrinaPagerComponent implements OnInit, OnChanges {
 	}
 
 	selectPage(pageId: number) {
+		this.currentPage = pageId;
 		this.eventPageSelected.emit(pageId);
 	}
 

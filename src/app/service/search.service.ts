@@ -29,7 +29,7 @@ export class SearchService {
 		//this.totalPages    = 0;
 	//}
 
-	makeSearch(): Observable<SearchResponse> {
+	makeSearch(searchTerm: string, minPrice: number, maxPrice: number, pageId: number): Observable<SearchResponse> {
 	//makeSearch(): void {
 
 		//let res = this.http.get<SearchResponse[]>(`${environment.HOSTAPI}/store`)
@@ -42,7 +42,8 @@ export class SearchService {
 		//});
 
 		//console.log(this.products)
-		return this.http.get<SearchResponse>(`${environment.HOSTAPI}/store`)
+		return this.http.get<SearchResponse>(
+		`${environment.HOSTAPI}/store?searchterm=${searchTerm}&minprice=${minPrice}&maxprice=${maxPrice}&pageid=${pageId}`)
 	}
 }
 
