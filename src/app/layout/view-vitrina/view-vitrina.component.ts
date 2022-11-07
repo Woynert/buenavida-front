@@ -29,5 +29,9 @@ export class ViewVitrinaComponent implements OnInit {
 			this.totalPages    = Math.ceil(res.totalcount / 12); // 12 items per page
 		});
 	}
+	
+	selectPage(pageId: number) {
+		console.log("sel ", pageId)
+	}
 
 }

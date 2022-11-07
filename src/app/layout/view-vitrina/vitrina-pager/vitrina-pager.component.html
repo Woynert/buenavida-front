@@ -9,7 +9,9 @@
 		<div
 		*ngFor="let i of pagesArray"
 		class="vitrina__pageButton">
-			<div class="vitrina__pageButton__container">
+			<div
+			(click)="selectPage(i)"
+			class="vitrina__pageButton__container">
 				{{ i+1 }}
 			</div>
 		</div>

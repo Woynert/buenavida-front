@@ -33,8 +33,10 @@
 					</div>
 
 					<div class="vitrina__pageControls">
-						<app-vitrina-pager [currentPage]="initialPage" [totalPages]="totalPages"></app-vitrina-pager>
-						<!--<app-vitrina-pager></app-vitrina-pager>-->
+						<app-vitrina-pager
+							[currentPage]="initialPage" [totalPages]="totalPages"
+							(eventPageSelected)="selectPage($event)"
+							></app-vitrina-pager>
 					</div>
 				</div>
 
