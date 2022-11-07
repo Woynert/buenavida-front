@@ -32,12 +32,15 @@
 
 					<div class="vitrina__pageControls">
 						<app-vitrina-pager
-							[currentPage]="initialPage" [totalPages]="totalPages"
-							(eventPageSelected)="selectPage($event)"
+							[currentPage]="selectedPage" [totalPages]="totalPages"
+							(eventPageSelected)="eventSelectPage($event)"
 							></app-vitrina-pager>
 					</div>
 				</div>
 
 	</div>
 </div>
-<app-vitrina-filter class="sidebar CB"></app-vitrina-filter>
+<app-vitrina-filter
+	class="sidebar CB"
+	(eventApplyPriceFilter)="eventApplyPriceFilter($event)"
+	></app-vitrina-filter>

@@ -21,6 +21,7 @@
 	<div 
 		class="vitrina__pageButton" id="vitrina__pageButtonRight"
 		[style.visibility]="(pagesOffset < totalPages - maxBtns) ? 'visible' : 'hidden'"
+		[style.display]="(totalPages <= 5) ? 'none' : 'inline-block'"
 		>
 		<div (click)="goRight()" class="vitrina__pageButton__container">></div>
 	</div>

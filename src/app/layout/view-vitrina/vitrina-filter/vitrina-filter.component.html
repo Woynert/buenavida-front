@@ -11,17 +11,17 @@
 				<div class="doubleRange__progressBar--background"> </div>
 				<div class="doubleRange__progressBar" #progressBar> </div>
 				<input (input)="updateDoubleRange()" #rangeLeft
-				class="doubleRange__range" [min]="minPrice" [max]="maxPrice" value="20" type="range">
+				class="doubleRange__range" [min]="minPrice" [max]="maxPrice" value="0" type="range">
 				<input (input)="updateDoubleRange()" #rangeRight
-				class="doubleRange__range" [min]="minPrice" [max]="maxPrice" max="70" value="60" type="range">
+				class="doubleRange__range" [min]="minPrice" [max]="maxPrice" value="100" type="range">
 			</div>
 		</div>
 		<div class="numFilter">
 			<div class="numFilter__label">DESDE</div>
 			<div class="numFilter__label">HASTA</div>
-			<input class="numFilter__valueBox" id="numFilter__left" type="number" min="0" max="70" [value]="leftPrice">
-			<input class="numFilter__valueBox" id="numFilter__right" type="number" min="0" max="70" [value]="rightPrice">
+			<input class="numFilter__valueBox" id="numFilter__left" type="number" min="0" max="70" [value]="leftPrice" disabled>
+			<input class="numFilter__valueBox" id="numFilter__right" type="number" min="0" max="70" [value]="rightPrice" disabled>
 		</div>
-		<div class="numFilter__submmit" id="numFilter__submmit">Filtrar</div>
+		<div class="numFilter__submmit" id="numFilter__submmit" (click)="applyPriceFilter()">Filtrar</div>
 	</div>
 </div>

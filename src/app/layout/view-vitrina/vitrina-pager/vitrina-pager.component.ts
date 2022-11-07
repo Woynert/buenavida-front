@@ -1,9 +1,19 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import {
+	Component,
+	OnInit,
+	Input,
+	OnChanges,
+	SimpleChanges,
+	Output,
+	EventEmitter,
+	ChangeDetectionStrategy
+} from '@angular/core';
 
 @Component({
 	selector: 'app-vitrina-pager',
 	templateUrl: './vitrina-pager.component.html',
-	styleUrls: ['./vitrina-pager.component.css']
+	styleUrls: ['./vitrina-pager.component.css'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VitrinaPagerComponent implements OnInit, OnChanges {
 
@@ -22,7 +32,10 @@ export class VitrinaPagerComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
-		console.log("Me")
+		console.log("Me",changes, this.totalPages);
+		//this.totalPages  = changes
+		//this.currentPage = 0;
+		this.pagesOffset = 0;
 		this.updateOffset()
 	}
 
@@ -33,7 +46,7 @@ export class VitrinaPagerComponent implements OnInit, OnChanges {
 
 	updateOffset() {
 		this.pagesArray = [];
-		for (let i = this.pagesOffset; i < this.pagesOffset + this.maxBtns; i++){
+		for (let i = this.pagesOffset; i < Math.min(this.totalPages, this.pagesOffset + this.maxBtns); i++){
 			this.pagesArray.push(i);
 		}
 	}
