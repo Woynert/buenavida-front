@@ -17,15 +17,14 @@ export class SessionService {
 		private http: HttpClient
 	) { }
 
-	// endpoints
-	// /session/login
 	// /session/signin
-	
 
 	signIn(form: SignInI): Observable<MessageI> {
 		const body=JSON.stringify(form);
 		return this.http.post<MessageI>(`${environment.HOSTAPI}/session/signin`, body)
 	}
+
+	// /session/login
 
 	logIn(form: LogInI): Observable<MessageI> {
 		const body=JSON.stringify(form);

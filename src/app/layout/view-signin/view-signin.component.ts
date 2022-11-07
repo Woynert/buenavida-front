@@ -11,27 +11,29 @@ import { SessionService } from '@service/session.service';
 })
 export class ViewSigninComponent implements OnInit {
 
-	public reCaptcha:string = "";
-	public captcha:string = "";
-	public error_captcha:string = "";
-	public error_name:string = "";
-	public name:string = "";
-	public error_lastname:string = "";
-	public lastname:string = "";
-	public error_email:string = "";
-	public email:string = "";
-	public error_password:string = "";
-	public password:string = "";
-	public error_password_again:string = "";
-	public password_again:string = "";
-	public pass_msg:string = "";
-	public mesage_pws:string = "Must have a minimum of 8 characters, at least one number, one special character, one uppercase letter and one lowercase letter";
-  public message:string = "";
-  public signin:boolean = false;
+	public reCaptcha      :string = "";
+	public captcha        :string = "";
+	public error_captcha  :string = "";
+	public error_name     :string = "";
+	public name           :string = "";
+	public error_lastname :string = "";
+	public lastname       :string = "";
+	public error_email    :string = "";
+	public email          :string = "";
+	public error_password :string = "";
+	public password       :string = "";
+	public error_password_again :string = "";
+	public password_again :string = "";
+	public pass_msg       :string = "";
+	public mesage_pws     :string = "Must have a minimum of 8 characters, at least one number, one special character, one uppercase letter and one lowercase letter";
+	public message        :string = "";
+	public signin         :boolean = false;
 
-	constructor(private captchaService: CaptchaService,
-    private sessionService: SessionService,
-    private router: Router) { 
+	constructor(
+		private captchaService: CaptchaService,
+		private sessionService: SessionService,
+		private router: Router
+	) { 
 		const checkDiv = setInterval(() => {
 			this.captchaService.createCaptcha();
 			this.captcha = this.captchaService.captcha.join("");
@@ -60,72 +62,87 @@ export class ViewSigninComponent implements OnInit {
 
 		let captcha = this.captchaService.validateCaptcha(this.reCaptcha);
 
-		if (captcha == true) {
-			if (this.name === '') {
-				this.error_name = "Please enter your name";
-				conditional = false;
-			}
-			if (this.lastname === '') {
-				this.error_lastname = "Please enter your last name";
-				conditional = false;
-			}
-			if (this.email === '') {
-				this.error_email = "Please enter your email";
-				conditional = false;
-			} else if (regex_email.test(this.email) == false){
-				this.error_email = "Please enter a valid email";
-				conditional = false;
-			}
-			if (this.password === '') {
-				this.error_password = "Please enter your password";
-				conditional = false;
-			} else if (regex_password.test(this.password) == false){
-				this.error_password = "Must have a minimum of 8 characters, at least one number, one special character, one uppercase letter and one lowercase letter";
-				conditional = false;
-			}
-			if (this.password_again === '') {
-				this.error_password_again = "Please confirm your password";
-				conditional = false;
-			}  else if (this.password != this.password_again) {
-				this.error_password_again = "Password fields are different";
-				conditional = false;
-			}
-			if(conditional == true){
-				
-        let form = {"firstname": this.name,
-                    "lastname": this.lastname,
-                    "email": this.email,
-                    "password":this.password,
-                    "passwordconfirm":this.password_again};
-                    
-        this.sessionService.signIn(form).subscribe({
-                        next: data => {
-                          this.message = data.message;
-                          this.signin = true;
-                        },
-                        error: error => {
-                          this.message = error.error.message;
-                          this.signin = false;
-                        }});
-                    
-        const checkMessagePost = setInterval(() => {if (this.message != ""){
-                          this.pass_msg = this.message;
-                          this.mesage_pws = "";
-                          clearInterval(checkMessagePost);
-                          if (this.signin) {
-                            this.pass_msg += " in 5 seconds you will be redirected to LogIn Page";
-                            setTimeout(() => {
-                              this.router.navigate(['/login']);
-                            }, 5000);
-                          }
-                          
-                        }
-                      }, 500);
-			}
-		}else{
+		// validate fields
+
+		if (captcha == false) {
 			this.error_captcha = this.captchaService.message_error;
+			return;
 		}
 
+		if (this.name === '') {
+			this.error_name = "Please enter your name";
+			return;
+		}
+
+		if (this.lastname === '') {
+			this.error_lastname = "Please enter your last name";
+			return;
+		}
+
+		if (this.email === '') {
+			this.error_email = "Please enter your email";
+			return;
+		}
+
+		else if (regex_email.test(this.email) == false){
+			this.error_email = "Please enter a valid email";
+			return;
+		}
+
+		if (this.password === '') {
+			this.error_password = "Please enter your password";
+			return;
+		}
+
+		else if (regex_password.test(this.password) == false){
+			this.error_password = "Must have a minimum of 8 characters, at least one number, one special character, one uppercase letter and one lowercase letter";
+			return;
+		}
+
+		if (this.password_again === '') {
+			this.error_password_again = "Please confirm your password";
+			return;
+		}
+
+		else if (this.password != this.password_again) {
+			this.error_password_again = "Password fields are different";
+			return;
+		}
+
+		// make request
+
+		let form = {
+			"firstname"      : this.name,
+			"lastname"       : this.lastname,
+			"email"          : this.email,
+			"password"       : this.password,
+			"passwordconfirm": this.password_again
+		};
+
+		this.sessionService.signIn(form).subscribe({
+			next: data => {
+				this.message = data.message;
+				this.signin = true;
+			},
+			error: error => {
+				this.message = error.error.message;
+				this.signin = false;
+			}
+		});
+
+		const checkMessagePost = setInterval(() => {
+			if (this.message != ""){
+				this.pass_msg = this.message;
+				this.mesage_pws = "";
+				clearInterval(checkMessagePost);
+
+				if (this.signin) {
+					this.pass_msg += " in 5 seconds you will be redirected to LogIn Page";
+					setTimeout(() => { this.router.navigate(['/login']); }, 5000);
+				}
+
+			}
+		}, 500);
 
 	}
 
