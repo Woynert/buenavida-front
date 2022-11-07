@@ -1,0 +1,41 @@
+
+/* VITRINA PAGE CONTROLS */
+
+.vitrina__pageControls{
+	background: white;
+	width: 100%;
+	height: 100%;
+}
+
+.vitrina__pageControls__container{
+	width: fit-content;
+	margin-left: auto;
+}
+
+.vitrina__pageControlNumbers{
+	display: inline-block;
+}
+
+.vitrina__pageButton{
+	display: inline-block;
+}
+
+.vitrina__pageButton--selected{
+	color: green;
+}
+
+.vitrina__pageButton__container{
+	background: white;
+	border-color: #d7d7d7;
+	border-style: solid;
+	border-width: 1px;
+	/*! border-radius: 4px; */
+	width: 35px;
+	height: 35px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	margin-right: 5px;
+}
+

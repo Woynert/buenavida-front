@@ -33,16 +33,8 @@
 					</div>
 
 					<div class="vitrina__pageControls">
-						<div class="vitrina__pageControls__container">
-							<div class="vitrina__pageButton" id="vitrina__pageButtonLeft">
-								<div class="vitrina__pageButton__container"><</div>
-							</div><!--
-							--><div class="vitrina__pageControlNumbers" id="vitrina__pageControlNumbers">
-							</div><!--
-							--><div class="vitrina__pageButton" id="vitrina__pageButtonRight">
-								<div class="vitrina__pageButton__container">></div>
-							</div>
-						</div>
+						<app-vitrina-pager [currentPage]="initialPage" [totalPages]="totalPages"></app-vitrina-pager>
+						<!--<app-vitrina-pager></app-vitrina-pager>-->
 					</div>
 				</div>
 

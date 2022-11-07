@@ -11,10 +11,12 @@ import { SearchService, SearchResponse } from '@service/search.service';
 export class ViewVitrinaComponent implements OnInit {
 
 	products: Product[] = [];
-	totalProducts: number = 0;
+	
+	initialPage: number = 0;
+	totalPages: number  = 0;
 
 	constructor(
-		private searchService: SearchService
+		public searchService: SearchService
 	) { }
 
 	ngOnInit(): void {
@@ -22,9 +24,9 @@ export class ViewVitrinaComponent implements OnInit {
 	}
 
 	getProductsFromSearch(): void {
-		this.searchService.makeSearch().subscribe((res) => {
+		this.searchService.makeSearch().subscribe((res: SearchResponse) => {
 			this.products      = res.products;
-			this.totalProducts = res.totalcount;
+			this.totalPages    = Math.ceil(res.totalcount / 12); // 12 items per page
 		});
 	}
 

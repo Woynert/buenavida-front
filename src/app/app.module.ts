@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 // vitrina
 import { ViewVitrinaComponent } from '@layout/view-vitrina/view-vitrina.component';
 import { VitrinaFilterComponent } from '@layout/view-vitrina/vitrina-filter/vitrina-filter.component';
+import { VitrinaPagerComponent } from './layout/view-vitrina/vitrina-pager/vitrina-pager.component';
 
 import { ViewCartComponent } from '@layout/view-cart/view-cart.component';
 import { ViewLoginComponent } from '@layout/view-login/view-login.component';
@@ -23,7 +24,8 @@ import { HeaderComponent } from '@shared/header/header.component';
     ViewCartComponent,
     ViewLoginComponent,
     ViewSigninComponent,
-    VitrinaFilterComponent
+    VitrinaFilterComponent,
+    VitrinaPagerComponent
   ],
   imports: [
     BrowserModule,
