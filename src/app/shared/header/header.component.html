@@ -3,8 +3,13 @@
 	<div class="header__container">
 
 		<div class="searchBar" (click)="focusSearchBar()">
-			<input type="text" placeholder="Buscar" class="searchBar__input" #searchBarInput>
-			<div class="searchBar__icon">
+			<input type="text" placeholder="Buscar" class="searchBar__input"
+				(keyup.enter)="setSearchTerm()"
+				#searchBarInput
+				>
+			<div class="searchBar__icon"
+				(click)="setSearchTerm()"
+				>
 				<img src="/assets/icon/search.svg">
 			</div>
 		</div>

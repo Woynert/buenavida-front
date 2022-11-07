@@ -1,4 +1,29 @@
 
+/*filter header*/
+
+.sidebar__expandable{
+	width: 100%;
+	height: fit-content;
+}
+
+.sidebar__expandable__header{
+	width: 100%;
+	height: 40px;
+	background: white;
+	padding: 10px;
+	position: relative;
+}
+
+.sidebar__expandable__header__label{
+	display: inline-block;
+}
+
+.sidebar__expandable__header__button{
+	display: inline-block;
+	position: absolute;
+	right: 10px;
+}
+
 /*double range*/
 
 .doubleRange{

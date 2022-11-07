@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { Product, iEventApplyPriceFilter } from '@shared/interface';
 import { SearchService, SearchResponse } from '@service/search.service';
@@ -15,6 +16,7 @@ export class ViewVitrinaComponent implements OnInit {
 	//initialPage: number = 0;
 	totalPages: number  = 0;
 
+	searchTermSubscription: Subscription = Subscription.EMPTY;
 	searchTerm: string = "";
 	selectedPage: number = 0;
 	minPrice: number = 0;
@@ -26,6 +28,13 @@ export class ViewVitrinaComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getProductsFromSearch();
+
+		this.searchTermSubscription = this.searchService.searchTerm.subscribe(
+			(term: string) => {
+				this.searchTerm = term;
+				this.selectedPage = 0;
+				this.getProductsFromSearch();
+			});
 	}
 
 	getProductsFromSearch(): void {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from '@environment';
 
 import { Product } from '@shared/interface';
@@ -11,39 +11,19 @@ import { Product } from '@shared/interface';
 
 export class SearchService {
 
-	//products: Product[] = [];
-
-	////totalProducts: number = 0;
-	//initialPage  : number = 0;
-	//totalPages   : number = 0;
+	searchTerm: Subject<string> = new Subject<string>();
 
 	constructor(
 		private http: HttpClient
 	) { }
 
-	//reset(): void {
-		//this.products = [];
-
-		////this.totalProducts = 0;
-		//this.initialPage   = 0;
-		//this.totalPages    = 0;
-	//}
-
 	makeSearch(searchTerm: string, minPrice: number, maxPrice: number, pageId: number): Observable<SearchResponse> {
-	//makeSearch(): void {
-
-		//let res = this.http.get<SearchResponse[]>(`${environment.HOSTAPI}/store`)
-		//return res.products
-		//this.http.get<SearchResponse>(`${environment.HOSTAPI}/store`)
-			//.subscribe((res: SearchResponse) => {
-			//this.products      = res.products;
-			////this.totalProducts = res.totalcount;
-			//this.totalPages    = Math.ceil(res.totalcount / 24);
-		//});
-
-		//console.log(this.products)
 		return this.http.get<SearchResponse>(
 		`${environment.HOSTAPI}/store?searchterm=${searchTerm}&minprice=${minPrice}&maxprice=${maxPrice}&pageid=${pageId}`)
+	}
+
+	setSearchTerm(term: string){
+		this.searchTerm.next(term);
 	}
 }
 
