@@ -15,7 +15,7 @@
 									<div class="vitrina__item__favoriteButton">
 										<img class="vitrina__item__favoriteIcon" src="/assets/icon/heart.svg"/>
 									</div>
-									<div class="vitrina__item__discount"><div>{{product.discount}}%</div></div>
+									<div *ngIf="product.discount > 0" class="vitrina__item__discount"><div>{{product.discount}}%</div></div>
 									<div class="vitrina__item__imgContainer">
 										<img class="vitrina__item__img" [src]="product.imageurl"/>
 									</div>
