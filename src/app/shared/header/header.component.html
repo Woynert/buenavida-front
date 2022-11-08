@@ -84,11 +84,11 @@
 			</div>
 			<div class="free_shipping_div" >
 				<p class="p_free_shipping" *ngIf="(iva_include)>=50;else noFree">Puedes Disfrutar del Envio Gratuito</p>
-				<ng-template #noFree class="p_free_shipping">
+				<ng-template #noFree>
 					<p class="p_free_shipping">Te faltan {{(50 - iva_include).toFixed(2)}} € para disfrutar del envio gratuito</p>
 				</ng-template>
 			</div>
-			<button class="go_cart_button">Ir al carrito</button>
+			<button (click)="goCart()" class="go_cart_button">Ir al carrito</button>
 			<button class="make_order_button">Realizar Pedido</button>
 			<br>
 			<br>

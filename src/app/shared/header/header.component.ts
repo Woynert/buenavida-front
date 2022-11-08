@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef,HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { SearchService, SearchResponse } from '@service/search.service';
 import { CartService } from '@service/cart.service';
@@ -29,7 +30,8 @@ export class HeaderComponent implements OnInit {
 
 	constructor(
 		public searchService: SearchService,
-		public cartService: CartService
+		public cartService: CartService,
+		private router: Router
 	) {}
 
 	ngOnInit(): void {
@@ -78,5 +80,10 @@ export class HeaderComponent implements OnInit {
 
 	closeModalCart(): void {
 		this.styleDisplayModalCart = "display:none";
+	}
+
+	goCart(){
+		this.closeModalCart();
+		this.router.navigate(['/cart']);
 	}
 }
