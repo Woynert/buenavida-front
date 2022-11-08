@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef,HostListener } from '@angular/core';
+
 import { SearchService, SearchResponse } from '@service/search.service';
+import { CartService } from '@service/cart.service';
 
 import { Product } from '@shared/interface';
-
 import { ProductsCart } from '@shared/ProductsCart';
 
 @Component({
@@ -27,7 +28,8 @@ export class HeaderComponent implements OnInit {
 	public numbetChange:number = 0;
 
 	constructor(
-		public searchService: SearchService
+		public searchService: SearchService,
+		public cartService: CartService
 	) {}
 
 	ngOnInit(): void {
@@ -57,55 +59,20 @@ export class HeaderComponent implements OnInit {
 	}
 
 	calculateCart(): void {
-		if (localStorage.getItem("cart") != null) {
-			let products = JSON.parse(localStorage.getItem("cart") || "")
-			let total = 0;
-			let subtotal = 0;
-			this.productsCart = products;
-			for (let i = 0; i < products.length; i++) {
-				let element = products[i];
-				total += element.quantity;
-				subtotal += element.quantity * element.product.price;
-			}
-			this.total_productos = total;
-			this.subtotal = subtotal;
-			this.iva_include = (subtotal*0.19)+(subtotal);
-		}
+		this.cartService.calculateCart();
+		this.productsCart = this.cartService.productsCart;
+		this.total_productos = this.cartService.total_productos;
+		this.subtotal = this.cartService.subtotal;
+		this.iva_include = this.cartService.iva_include;
 	}
 
 	quantityChange(quantity:number,product: Product): void {  
-		if (localStorage.getItem("cart") != null) {
-			let products = JSON.parse(localStorage.getItem("cart") || "")
-			for (let i = 0; i < products.length; i++) {
-				let element = products[i];
-				if (element.product._id == product._id) {
-					let quantity_product = {
-						product: product,
-						quantity: quantity
-					}
-					products[i] = quantity_product;
-				}
-			}
-			localStorage.setItem('cart', JSON.stringify(products));
-		}
+		this.cartService.quantityChange(quantity,product);
 		this.calculateCart();
 	}
 
 	removeItemCart(product: Product): void {
-		let index = -1;
-		if (localStorage.getItem("cart") != null) {
-			let products = JSON.parse(localStorage.getItem("cart") || "")
-			for (let i = 0; i < products.length; i++) {
-				let element = products[i];
-				if (element.product._id == product._id) {
-					index = i;
-				}
-			}
-			if (index != -1) {
-				products.splice(index, 1);
-				localStorage.setItem('cart', JSON.stringify(products));
-			}
-		}
+		this.cartService.removeItemCart(product);
 		this.calculateCart();
 	}
 
