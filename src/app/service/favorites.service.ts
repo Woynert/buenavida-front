@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environment';
+import { ToastrService } from 'ngx-toastr';
 
 import { SessionService } from '@service/session.service';
 import { MessageI } from '@shared/message';
@@ -11,6 +12,7 @@ import { MessageI } from '@shared/message';
 export class FavoritesService {
 
 	constructor(
+		private toastr: ToastrService,
 		private http: HttpClient,
 		public sessionService: SessionService
 	) { }
@@ -27,7 +29,8 @@ export class FavoritesService {
 		try{
 			let options = { withCredentials: true };
 			let asd =await this.http.put<MessageI>(`${environment.HOSTAPI}/favorite?itemid=${itemid}`, {}, options).toPromise();
-			console.log(asd, "Item added to favorites");
+			//console.log(asd, "Item added to favorites");
+			this.toastr.success('Item added to favorites', 'asd');
 		}
 		catch(e){
 			console.log("Couldn't add item to favorites");

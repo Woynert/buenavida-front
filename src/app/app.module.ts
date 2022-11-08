@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ClickOutsideModule } from 'ng-click-outside';
+import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
+
 
 // vitrina
 import { ViewVitrinaComponent } from '@layout/view-vitrina/view-vitrina.component';
@@ -35,7 +37,10 @@ import { HeaderComponent } from '@shared/header/header.component';
 		HttpClientModule,
 		ReactiveFormsModule,
 		FormsModule,
-		ClickOutsideModule
+		ClickOutsideModule,
+
+		// Toat with no animations
+		ToastNoAnimationModule.forRoot(),
 	],
 	providers: [],
 	bootstrap: [AppComponent]
