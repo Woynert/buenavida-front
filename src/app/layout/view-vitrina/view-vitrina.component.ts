@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import { Product, iEventApplyPriceFilter } from '@shared/interface';
 import { SearchService, SearchResponse } from '@service/search.service';
 
+import { CartService } from '@service/cart.service';
+
 @Component({
 	selector: 'app-view-vitrina',
 	templateUrl: './view-vitrina.component.html',
@@ -21,7 +23,8 @@ export class ViewVitrinaComponent implements OnInit {
 	maxPrice: number = 1000;
 
 	constructor(
-		public searchService: SearchService
+		public searchService: SearchService,
+		public cartService: CartService
 	) { }
 
 	ngOnInit(): void {
@@ -61,36 +64,7 @@ export class ViewVitrinaComponent implements OnInit {
 	}
 
 	addProduct(product: Product){
-		let duplicate = false;								
-		if (localStorage.getItem("cart") != null) {
-			let products = JSON.parse(localStorage.getItem("cart") || "")
-			for (let i = 0; i < products.length; i++) {
-				let element = products[i];
-				if (element.product._id == product._id) {
-					let quantity_product = {
-						product: product,
-						quantity: element.quantity + 1
-					}
-					duplicate = true;
-					products[i] = quantity_product;
-				}
-			}
-			if (!duplicate) {
-				let quantity_product = {
-					product: product,
-					quantity: 1
-				}
-				products.push(quantity_product);
-			}
-			localStorage.setItem('cart', JSON.stringify(products));
-		} else {
-			let quantity_product = {
-				product: product,
-				quantity: 1
-			}
-			let products = [quantity_product];
-			localStorage.setItem('cart', JSON.stringify(products));
-		}
+		this.cartService.addProduct(product,1);
 	}
 
 }
