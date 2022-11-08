@@ -7,5 +7,13 @@ export interface Product {
 	discount:     number;
 	priceperunit: string;
 	description:  string;
+	imageurl:     string;
 	score:        number;
+}
+
+// Vitrina apply price filter on product search
+
+export interface iEventApplyPriceFilter {
+	minPrice: number;
+	maxPrice: number;
 }

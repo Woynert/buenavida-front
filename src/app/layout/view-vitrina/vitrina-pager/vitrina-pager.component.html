@@ -1,0 +1,32 @@
+<div class="vitrina__pageControls__container">
+
+	<!--Go left button-->
+	<div
+		*ngIf="pagesOffset > 0"
+		class="vitrina__pageButton" id="vitrina__pageButtonLeft">
+		<div (click)="goLeft()" class="vitrina__pageButton__container"><</div>
+	</div>
+
+	<!--Page number buttons-->
+	<div class="vitrina__pageControlNumbers" id="vitrina__pageControlNumbers">
+		<div
+		*ngFor="let i of pagesArray"
+		[ngClass]="{'vitrina__pageButton--selected' : i == currentPage}"
+		class="vitrina__pageButton">
+			<div
+			(click)="selectPage(i)"
+			class="vitrina__pageButton__container">
+				{{ i+1 }}
+			</div>
+		</div>
+	</div>
+
+	<!--Go right button-->
+	<div 
+		class="vitrina__pageButton" id="vitrina__pageButtonRight"
+		[style.visibility]="(pagesOffset < totalPages - maxBtns) ? 'visible' : 'hidden'"
+		[style.display]="(totalPages <= 5) ? 'none' : 'inline-block'"
+		>
+		<div (click)="goRight()" class="vitrina__pageButton__container">></div>
+	</div>
+</div>

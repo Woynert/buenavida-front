@@ -1,3 +1,5 @@
+/*layout*/
+
 .sidebar {
 	height: 100%;
 	width: var(--sidebar-width);
@@ -16,8 +18,147 @@
 }
 
 .mainVitrina {
-	min-width: 100%;
+	min-width: 800px;
 	min-height: 100%;
-	max-width: 100%;
+	max-width: 1000px;
+	margin: 0 auto 0 auto;
+}
+
+/*VITRINA*/
+
+.vitrina__container{
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+}
+
+/*VITRINA ITEMS*/
+
+.vitrina__grid{
+	width: 100%;
+	height: calc(90%);
+	display: grid;
+	grid-template-columns: 25% 25% 25% 25%;
+	max-height: 100%;
+	min-height: 100%;
+}
+
+.vitrina__item{
+	padding: 10px;
+	width: 100%;
+	height: 400px;
+	display: flex;
+	justify-content: center;
+}
+
+/*On mouse hover*/
+
+.vitrina__item__container1:hover{
+	position: relative;
+	z-index: 100;
+	display: flex;
+	justify-content: center;
+}
+
+.vitrina__item__container1:hover .vitrina__item__container2{
+	position: absolute;
+	width: 110%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	z-index: 300;
+	padding: 0 10px 0 10px;
+	height: 110%;
+}
+
+.vitrina__item__container1:hover .vitrina__item__buyButton{
+	display: block;
+}
+
+.vitrina__item__container1:hover .vitrina__item__favoriteButton{
+	display: block;
+}
+
+.vitrina__item__container1:hover .vitrina__item__imgContainer,
+.vitrina__item__container1:hover .vitrina__item__img {
+	height: 220px;
+}
+
+.vitrina__item__container1{
+	width: 100%;
+	height: 100%;
+}
+
+.vitrina__item__container2{
+	height: 100%;
+	width: 100%;
+	background: white; 
+	margin: auto;
+	position: relative;
+}
+
+.vitrina__item__imgContainer{
+	margin: auto;
+	width: fit-content;
+	height: 200px;
+}
+
+.vitrina__item__img{
+	height: 200px;
+}
+
+.vitrina__item__title{
+	text-align: center;
+	font-weight: bold;
+	font-size: 1em;
+}
+
+.vitrina__item__units{
+	color: gray;
+	text-align: center;
+	font-weight: bold;
+	font-size: 0.8em;
+}
+
+.vitrina__item__price{
+	font-weight: bold;
+	color: green;
+	text-align: center;
+}
+
+.vitrina__item__buyButton{
+	background: orange;
+	border-radius: 90px;
+	padding: 10px;
+	color: white;
+	width: fit-content;
+	margin: auto;
+	display: none;
+}
+
+.vitrina__item__favoriteButton{
+	position: absolute;
+	right: 0;
+	margin-top: 10px;
+	margin-right: 10px;
+	display: none;
+}
+
+.vitrina__item__favoriteIcon{
+	
+}
+
+.vitrina__item__discount{
+	position: absolute;
+	left: 0;
+	margin-top: 10px;
+	margin-left: 10px;
+	background: red;
+	color: white;
+	border-radius: 90px;
+	height: 50px;
+	width: 50px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
 }
 

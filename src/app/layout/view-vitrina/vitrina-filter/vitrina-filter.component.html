@@ -1,1 +1,32 @@
-<p>vitrina-filter works!</p>
+<div class="sidebar__expandable">
+
+	<!-- Filter header -->
+	<div class="sidebar__expandable__header">
+		<div class="sidebar__expandable__header__label">Precio</div>
+		<div class="sidebar__expandable__header__button">
+			<img src="/assets/icon/dash.svg">
+		</div>
+	</div>
+
+	<!-- Price filter double range -->
+	<div class="sidebar__expandable__content" >
+		<div class="doubleRange">
+			<div class="doubleRange__container">
+				<div class="doubleRange__progressBar--background"> </div>
+				<div class="doubleRange__progressBar" #progressBar> </div>
+				<input (input)="updateDoubleRange()" #rangeLeft
+				class="doubleRange__range" [min]="minPrice" [max]="maxPrice" value="0" type="range">
+				<input (input)="updateDoubleRange()" #rangeRight
+				class="doubleRange__range" [min]="minPrice" [max]="maxPrice" value="100" type="range">
+			</div>
+		</div>
+		<div class="numFilter">
+			<div class="numFilter__label">DESDE</div>
+			<div class="numFilter__label">HASTA</div>
+			<input class="numFilter__valueBox" id="numFilter__left" type="number" min="0" max="70" [value]="leftPrice" disabled>
+			<input class="numFilter__valueBox" id="numFilter__right" type="number" min="0" max="70" [value]="rightPrice" disabled>
+		</div>
+		<div class="numFilter__submmit" id="numFilter__submmit" (click)="applyPriceFilter()">Filtrar</div>
+	</div>
+
+</div>

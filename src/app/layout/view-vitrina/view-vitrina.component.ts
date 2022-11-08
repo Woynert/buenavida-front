@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-import { Product } from '@shared/interface';
-import { SearchService } from '@service/search.service';
+import { Product, iEventApplyPriceFilter } from '@shared/interface';
+import { SearchService, SearchResponse } from '@service/search.service';
 
 @Component({
 	selector: 'app-view-vitrina',
@@ -10,19 +11,53 @@ import { SearchService } from '@service/search.service';
 })
 export class ViewVitrinaComponent implements OnInit {
 
-	products: Product[] = [];
+	searchTermSubscription: Subscription = Subscription.EMPTY;
+
+	products    : Product[] = [];
+	totalPages  : number  = 0;
+	searchTerm  : string = "";
+	selectedPage: number = 0;
+	minPrice: number = 0;
+	maxPrice: number = 1000;
 
 	constructor(
-		private searchService: SearchService
+		public searchService: SearchService
 	) { }
 
 	ngOnInit(): void {
 		this.getProductsFromSearch();
+
+		// get search term from topbar
+		this.searchTermSubscription = this.searchService.searchTerm.subscribe(
+			(term: string) => {
+				this.searchTerm = term;
+				this.selectedPage = 0;
+				this.getProductsFromSearch();
+			});
 	}
 
+	// make search
+
 	getProductsFromSearch(): void {
-		this.searchService.makeSearch()
-			.subscribe(products => this.products = products);
+		this.searchService.makeSearch(this.searchTerm, this.minPrice, this.maxPrice, this.selectedPage)
+		.subscribe((res: SearchResponse) => {
+			this.products      = res.products;
+			this.totalPages    = Math.ceil(res.totalcount / 12); // 12 items per page
+		});
+	}
+
+	// change selected page
+	
+	eventSelectPage(pageId: number) {
+		this.selectedPage = pageId;
+		this.getProductsFromSearch()
+	}
+
+	eventApplyPriceFilter(filter: iEventApplyPriceFilter) {
+		this.minPrice = filter.minPrice;
+		this.maxPrice = filter.maxPrice;
+		this.selectedPage = 0;
+		this.getProductsFromSearch();
 	}
 
 }

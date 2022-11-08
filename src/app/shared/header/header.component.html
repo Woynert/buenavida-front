@@ -1,3 +1,48 @@
-<div class="header">
-	<p>header works!</p>
+<div class="header C3">
+	<img class="header__logo C2" src="/assets/logo.jpg"/>
+	<div class="header__container">
+
+		<!--Search bar-->
+		<div class="searchBar" (click)="focusSearchBar()">
+			<input type="text" placeholder="Buscar" class="searchBar__input"
+				(keyup.enter)="setSearchTerm()"
+				#searchBarInput
+				>
+			<div class="searchBar__icon"
+				(click)="setSearchTerm()"
+				>
+				<img src="/assets/icon/search.svg">
+			</div>
+		</div>
+
+		<!--Mis favoritos-->
+		<div class="headerButton">
+			<div class="headerButton__container" id="headerButton__favorites">
+				<div class="headerButton__icon">
+					<img src="/assets/icon/heart.svg">
+				</div>
+				<div class="headerButton__label">Mis favoritos</div>
+			</div>
+		</div>
+
+		<!--Mi cuenta-->
+		<div class="headerButton">
+			<div class="headerButton__container" id="headerButton__account">
+				<div class="headerButton__icon">
+					<img src="/assets/icon/person-circle.svg">
+				</div>
+				<div class="headerButton__label">Mi cuenta</div>
+			</div>
+		</div>
+
+		<!--Mi carrito-->
+		<div class="headerButton">
+			<div class="headerButton__container" id="headerButton__cart">
+				<div class="headerButton__icon">
+					<img src="/assets/icon/basket3.svg">
+				</div>
+				<div class="headerButton__label">Mi carrito</div>
+			</div>
+		</div>
+	</div>
 </div>
