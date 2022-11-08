@@ -9,6 +9,7 @@ export interface Product {
 	description:  string;
 	imageurl:     string;
 	score:        number;
+	favorite:     boolean;
 }
 
 // Vitrina apply price filter on product search
@@ -16,4 +17,11 @@ export interface Product {
 export interface iEventApplyPriceFilter {
 	minPrice: number;
 	maxPrice: number;
+}
+
+export interface iUserInfo {
+	firstname: string;
+	lastname:  string;
+	email:     string;
+	favorites: Product[];
 }

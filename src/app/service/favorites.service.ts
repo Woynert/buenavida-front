@@ -28,7 +28,7 @@ export class FavoritesService {
 		// action
 		try{
 			let options = { withCredentials: true };
-			let asd =await this.http.put<MessageI>(`${environment.HOSTAPI}/favorite?itemid=${itemid}`, {}, options).toPromise();
+			let asd = await this.http.put<MessageI>(`${environment.HOSTAPI}/favorite?itemid=${itemid}`, {}, options).toPromise();
 			//console.log(asd, "Item added to favorites");
 			this.toastr.success('Item added to favorites', 'asd');
 		}

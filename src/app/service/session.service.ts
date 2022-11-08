@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@environment';
 
+import { iUserInfo } from '@shared/interface';
 import { SignInI } from '@shared/signinI';
 import { LogInI } from '@shared/logInI';
 import { MessageI } from '@shared/message';
@@ -12,6 +13,8 @@ import { MessageI } from '@shared/message';
 })
 
 export class SessionService {
+
+	currentUser?: iUserInfo;
 
 	constructor(
 		private http: HttpClient
@@ -27,10 +30,30 @@ export class SessionService {
 
 	// /session/login
 
-	logIn(form: LogInI): Observable<MessageI> {
-		let options = { withCredentials: true };
-		const body=JSON.stringify(form);
-		return this.http.post<MessageI>(`${environment.HOSTAPI}/session/login`, body, options)
+	//logIn(form: LogInI): Observable<MessageI> {
+		//let options = { withCredentials: true };
+		//const body=JSON.stringify(form);
+		//return this.http.post<MessageI>(`${environment.HOSTAPI}/session/login`, body, options)
+	//}
+	
+	async logIn(form: LogInI): Promise<string> {
+
+		try{
+			const options = { withCredentials: true };
+			const body = JSON.stringify(form);
+			const msg = await this.http.post<MessageI>(`${environment.HOSTAPI}/session/login`, body, options).toPromise();
+			await this.getUserInfo();
+			return msg!.message;
+		}
+		catch(e){
+			if (e instanceof HttpErrorResponse){
+				console.log(e.message);
+				if (e.error) throw new Error(e.error.message);
+			}
+
+			throw new Error("Unknow error");
+		}
+
 	}
 
 	// /session/refresh
@@ -67,5 +90,22 @@ export class SessionService {
 		// give up
 		return false;
 
+	}
+
+	// /user/info
+	async getUserInfo() {
+
+		if (!await this.checkSession())
+			return;
+
+		try{
+			let options = { withCredentials: true };
+			let user = await this.http.get<iUserInfo>(
+				`${environment.HOSTAPI}/user/info`, options).toPromise();
+			this.currentUser = user;
+		}
+		catch(e){
+			console.log(e);
+		}
 	}
 }
