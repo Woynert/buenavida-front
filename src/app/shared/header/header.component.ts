@@ -73,7 +73,7 @@ export class HeaderComponent implements OnInit {
 		}
 	}
 
-	onSearchChange(quantity:number,product: Product): void {  
+	quantityChange(quantity:number,product: Product): void {  
 		if (localStorage.getItem("cart") != null) {
 			let products = JSON.parse(localStorage.getItem("cart") || "")
 			for (let i = 0; i < products.length; i++) {
@@ -87,6 +87,24 @@ export class HeaderComponent implements OnInit {
 				}
 			}
 			localStorage.setItem('cart', JSON.stringify(products));
+		}
+		this.calculateCart();
+	}
+
+	removeItemCart(product: Product): void {
+		let index = -1;
+		if (localStorage.getItem("cart") != null) {
+			let products = JSON.parse(localStorage.getItem("cart") || "")
+			for (let i = 0; i < products.length; i++) {
+				let element = products[i];
+				if (element.product._id == product._id) {
+					index = i;
+				}
+			}
+			if (index != -1) {
+				products.splice(index, 1);
+				localStorage.setItem('cart', JSON.stringify(products));
+			}
 		}
 		this.calculateCart();
 	}
