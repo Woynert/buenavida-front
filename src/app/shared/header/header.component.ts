@@ -20,6 +20,8 @@ export class HeaderComponent implements OnInit {
 	public styleDisplayModalCart:string = "display:none";
 	public total_productos:number = 0;
 	public productsCart: ProductsCart[] = [];
+	public subtotal:number = 0;
+	public iva_include:number = 0;
 
 	constructor(
 		public searchService: SearchService
@@ -49,12 +51,16 @@ export class HeaderComponent implements OnInit {
 		if (localStorage.getItem("cart") != null) {
 			let products = JSON.parse(localStorage.getItem("cart") || "")
 			let total = 0;
+			let subtotal = 0;
 			this.productsCart = products;
 			for (let i = 0; i < products.length; i++) {
 				let element = products[i];
 				total += element.quantity;
+				subtotal += element.quantity * element.product.price;
 			}
 			this.total_productos = total;
+			this.subtotal = subtotal;
+			this.iva_include = (subtotal*0.19)+(subtotal);
 		}
 	}
 

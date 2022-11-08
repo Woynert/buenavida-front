@@ -62,8 +62,32 @@
 			<p class="title_car">Mi Carrito ({{total_productos}})</p>
 			<span class="close_car" (click)="closeModalCart()">&times;</span>
 			<div *ngFor="let product of productsCart" class="grid-products-car">
-				<div class="vitrina__item__title">{{product.product.title}}</div>
+				<div class="grid-products-item-car img_product_car">
+					<img class="modal_car_img" [src]="product.product.imageurl"/>
+				</div>
+				<div class="grid-products-item-car content_product_car">
+					<p class="p_title_product_modal_car">{{product.product.title.toUpperCase()}}</p>
+					<span class="span_close_car">&times;</span>
+					<p class="p_quantity_car">{{product.product.units}}</p>
+					<p class="p_letter_car">Cantidad:</p>
+					<input type="number" class="input_quantity_car" [value]="product.quantity" min="1">
+					<p class="p_price_total_car">{{(product.product.price * product.quantity).toFixed(2)}} €</p>
+				</div>
 			</div>
+			<div class="subtotal_div">
+				<p class="p_subtotal">Subtotal</p>
+				<p class="p_number_subtotal">{{subtotal.toFixed(2)}} €</p>
+			</div>
+			<div class="total_div">
+				<p class="p_total">TOTAL (IVA incluida)</p>
+				<p class="p_number_total">{{iva_include.toFixed(2)}} €</p>
+			</div>
+			<div class="free_shipping_div" >
+				<p class="p_free_shipping" *ngIf="(iva_include)>=50;else noFree">Puedes Disfrutar del Envio Gratuito</p>
+				<ng-template #noFree>Te faltan {{(50 - iva_include).toFixed(2)}} € para disfrutar del envio gratuito</ng-template>
+			</div>
+			<button class="go_cart_button">Ir al carrito</button>
+			<button class="make_order_button">Realizar Pedido</button>
 			<br>
 			<br>
 			<div class="list_products_modal" id="list_products_modal"></div>

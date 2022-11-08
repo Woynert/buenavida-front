@@ -134,3 +134,155 @@
 	float: right;
 	margin: 0;
 }
+
+.close_car {
+	color: #aaaaaa;
+	font-size: 28px;
+	font-weight: bold;
+	display:inline-block;
+	float: right;
+  }
+  
+  .close_car:hover,
+  .close_car:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+  }
+  
+  .title_car {
+	display:inline-block;
+  }
+  
+  .grid-products-car{
+	display: grid;
+  }
+  
+  .p_title_product_modal_car, .p_quantity_car{
+	margin-bottom: 0;
+  }
+  
+  .modal-content-car {
+	height: auto;
+  }
+  
+  .modal-content-car {
+	width: 35%;
+	margin-left: 30%;
+	margin-bottom: 5%;
+	font-size: 12px;
+  }
+
+  .grid-products-car{
+	grid-template-columns: 25% auto;
+  }
+  
+  .p_title_product_modal_car{
+	width: 90%;
+  }
+
+  .p_total, #title_car, .p_number_total {
+	font-size: 20px !important;
+  }
+  .input_quantity_car{
+	margin-right: 40%;
+  }
+  
+  .grid-products-car{
+	border-top: 1px solid #929292;
+  }
+  
+  .modal_car_img{
+	width: 100px;
+	height: 100px;
+  }
+  
+  .p_title_product_modal_car{
+	display: inline-block;
+  }
+  
+  .span_close_car{
+	display: inline-block;
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+  }
+  
+  .span_close_car:hover,
+  .span_close_car:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+  }
+  
+  .p_letter_car{
+	display: inline-block;
+	margin-right: 2%;
+	color: #aaaaaa;
+  }
+  
+  .input_quantity_car{
+	display: inline-block;
+	width: 60px;
+	text-align: center;
+	color: #5ccb5f;
+	font-weight: bolder;
+  }
+  
+  .p_price_total_car{
+	display: inline-block;
+	text-align: right;
+	margin-top: 0;
+  }
+  
+  .subtotal_div, .total_div, .free_shipping_div{
+	border-top: 1px solid #929292;
+  }
+  
+  .p_subtotal, .p_total{
+	display: inline-block;
+  }
+  
+  .p_subtotal, .p_quantity_car{
+	color: #aaaaaa;
+  }
+  
+  .p_quantity_car{
+	margin-top: 0;
+  }
+  
+  .p_number_subtotal, .p_number_total{
+	display: inline-block;
+	float: right;
+  }
+  
+.p_total, .p_free_shipping, #title_car {
+	color: #5ccb5f;
+}
+  
+.p_total, #title_car {
+	font-weight: bolder;
+	font-size: 16px;
+}
+  
+.p_number_total {
+	font-weight: bolder;
+}
+  
+.go_cart_button, .make_order_button{
+	background-color: #5ccb5f;
+	color: #fff;
+	border: 0;
+	margin-bottom: 2%;
+	border-radius: 60px;
+	width: 100%;
+	height: 50px;
+	font-size: 20px;
+	font-weight: bolder;
+}
+  
+.go_cart_button:hover, .make_order_button:hover{
+	background-color: #efa229;
+	color: #000;
+	cursor: pointer;
+}
