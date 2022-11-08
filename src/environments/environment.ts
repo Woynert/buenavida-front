@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  HOSTAPI: "http://127.0.0.1:8070",
+  HOSTAPI: "http://localhost:8070",
+  //HOSTAPI: "http://127.0.0.1:8070",
 };
 
 /*
