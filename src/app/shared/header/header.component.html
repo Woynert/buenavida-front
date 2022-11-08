@@ -70,7 +70,7 @@
 					<span class="span_close_car">&times;</span>
 					<p class="p_quantity_car">{{product.product.units}}</p>
 					<p class="p_letter_car">Cantidad:</p>
-					<input type="number" class="input_quantity_car" [value]="product.quantity" min="1">
+					<input type="number" class="input_quantity_car"  min="1" [(ngModel)]="product.quantity" (change)="onSearchChange(product.quantity,product.product)">
 					<p class="p_price_total_car">{{(product.product.price * product.quantity).toFixed(2)}} €</p>
 				</div>
 			</div>

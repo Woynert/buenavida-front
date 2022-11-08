@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef,HostListener } from '@angular/core';
 import { SearchService, SearchResponse } from '@service/search.service';
 
+import { Product } from '@shared/interface';
+
 import { ProductsCart } from '@shared/ProductsCart';
 
 @Component({
@@ -22,6 +24,7 @@ export class HeaderComponent implements OnInit {
 	public productsCart: ProductsCart[] = [];
 	public subtotal:number = 0;
 	public iva_include:number = 0;
+	public numbetChange:number = 0;
 
 	constructor(
 		public searchService: SearchService
@@ -38,6 +41,7 @@ export class HeaderComponent implements OnInit {
 		this.searchService.setSearchTerm(this.searchBarInput.nativeElement.value);	
 	}
 
+	/* Menu Funtion*/
 	showMyMenu(): void {
 		this.styleDisplay = "display:block";
 	}
@@ -46,8 +50,13 @@ export class HeaderComponent implements OnInit {
 		this.styleDisplay = "display:none";
 	}
 
+	/* Modal Cart Funtion */
 	openModalCart(): void {
 		this.styleDisplayModalCart = "display:block";
+		this.calculateCart();
+	}
+
+	calculateCart(): void {
 		if (localStorage.getItem("cart") != null) {
 			let products = JSON.parse(localStorage.getItem("cart") || "")
 			let total = 0;
@@ -62,6 +71,24 @@ export class HeaderComponent implements OnInit {
 			this.subtotal = subtotal;
 			this.iva_include = (subtotal*0.19)+(subtotal);
 		}
+	}
+
+	onSearchChange(quantity:number,product: Product): void {  
+		if (localStorage.getItem("cart") != null) {
+			let products = JSON.parse(localStorage.getItem("cart") || "")
+			for (let i = 0; i < products.length; i++) {
+				let element = products[i];
+				if (element.product._id == product._id) {
+					let quantity_product = {
+						product: product,
+						quantity: quantity
+					}
+					products[i] = quantity_product;
+				}
+			}
+			localStorage.setItem('cart', JSON.stringify(products));
+		}
+		this.calculateCart();
 	}
 
 	closeModalCart(): void {
