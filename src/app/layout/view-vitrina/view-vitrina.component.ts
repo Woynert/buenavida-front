@@ -60,4 +60,37 @@ export class ViewVitrinaComponent implements OnInit {
 		this.getProductsFromSearch();
 	}
 
+	addProduct(product: Product){
+		let duplicate = false;								
+		if (localStorage.getItem("cart") != null) {
+			let products = JSON.parse(localStorage.getItem("cart") || "")
+			for (let i = 0; i < products.length; i++) {
+				let element = products[i];
+				if (element.product._id == product._id) {
+					let quantity_product = {
+						product: product,
+						quantity: element.quantity + 1
+					}
+					duplicate = true;
+					products[i] = quantity_product;
+				}
+			}
+			if (!duplicate) {
+				let quantity_product = {
+					product: product,
+					quantity: 1
+				}
+				products.push(quantity_product);
+			}
+			localStorage.setItem('cart', JSON.stringify(products));
+		} else {
+			let quantity_product = {
+				product: product,
+				quantity: 1
+			}
+			let products = [quantity_product];
+			localStorage.setItem('cart', JSON.stringify(products));
+		}
+	}
+
 }
