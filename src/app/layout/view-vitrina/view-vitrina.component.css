@@ -143,8 +143,8 @@
 	display: none;
 }
 
-.vitrina__item__favoriteIcon{
-	
+.vitrina__item__favoriteIcon:hover{
+	cursor: pointer;
 }
 
 .vitrina__item__discount{

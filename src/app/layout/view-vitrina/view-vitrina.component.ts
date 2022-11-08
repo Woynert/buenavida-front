@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { Product, iEventApplyPriceFilter } from '@shared/interface';
 import { SearchService, SearchResponse } from '@service/search.service';
+import { FavoritesService } from '@service/favorites.service';
 
 @Component({
 	selector: 'app-view-vitrina',
@@ -21,7 +22,8 @@ export class ViewVitrinaComponent implements OnInit {
 	maxPrice: number = 1000;
 
 	constructor(
-		public searchService: SearchService
+		public searchService: SearchService,
+		public favoritesService: FavoritesService
 	) { }
 
 	ngOnInit(): void {
@@ -58,6 +60,15 @@ export class ViewVitrinaComponent implements OnInit {
 		this.maxPrice = filter.maxPrice;
 		this.selectedPage = 0;
 		this.getProductsFromSearch();
+	}
+
+	// favorites
+
+	addToFavorites(itemid: string) {
+		this.favoritesService.addToFavorites(itemid);
+		//let ok = await this.favoritesService.addToFavorites(itemid);
+		//if (ok)
+			//console.log("Added succesfully")
 	}
 
 }
