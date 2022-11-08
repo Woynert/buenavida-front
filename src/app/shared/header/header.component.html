@@ -27,12 +27,21 @@
 
 		<!--Mi cuenta-->
 		<div class="headerButton">
-			<div class="headerButton__container" id="headerButton__account">
+			<div class="headerButton__container" id="headerButton__account" (click)="showMyMenu()" (clickOutside)="hideMyMenu()">
 				<div class="headerButton__icon">
 					<img src="/assets/icon/person-circle.svg">
 				</div>
-				<div class="headerButton__label">Mi cuenta</div>
+				<div class="headerButton__label" >Mi cuenta</div>				
 			</div>
+
+			<div class="dropdown-content" id="myDropdown" [style]="styleDisplay">
+				<a href="#"><img src="/assets/icon/person-fill.svg" class="img_dropdown"> Mi cuenta</a>
+				<a href="#"><img src="/assets/icon/heart.svg" class="img_dropdown"> Mis Favoritos</a>
+				<a href="#"><img src="/assets/icon/check-lg.svg" class="img_dropdown"> Mi carrito</a>
+				<a routerLink="/login"><img src="/assets/icon/lock.svg" class="img_dropdown"> Entrar</a>
+				<a routerLink="/signin"><img src="/assets/icon/person-plus-fill.svg" class="img_dropdown"> Crear una cuenta</a>
+			</div>
+
 		</div>
 
 		<!--Mi carrito-->
