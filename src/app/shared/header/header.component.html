@@ -46,7 +46,7 @@
 
 		<!--Mi carrito-->
 		<div class="headerButton">
-			<div class="headerButton__container" id="headerButton__cart">
+			<div class="headerButton__container" id="headerButton__cart" (click)="openModalCart()">
 				<div class="headerButton__icon">
 					<img src="/assets/icon/basket3.svg">
 				</div>
@@ -54,4 +54,19 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="modal_car" [style]="styleDisplayModalCart">
+
+	<div class="modal-content-car">
+			<p class="title_car">Mi Carrito ({{total_productos}})</p>
+			<span class="close_car" (click)="closeModalCart()">&times;</span>
+			<div *ngFor="let product of productsCart" class="grid-products-car">
+				<div class="vitrina__item__title">{{product.product.title}}</div>
+			</div>
+			<br>
+			<br>
+			<div class="list_products_modal" id="list_products_modal"></div>
+	</div>
+
 </div>
