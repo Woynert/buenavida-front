@@ -57,3 +57,7 @@
 	margin-right: 2%;
 }
 
+.access_facebook:hover, .access:hover{
+	cursor: pointer;
+}
+

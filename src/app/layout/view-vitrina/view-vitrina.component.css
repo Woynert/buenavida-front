@@ -71,6 +71,7 @@
 
 .vitrina__item__container1:hover .vitrina__item__buyButton{
 	display: block;
+	cursor: pointer;
 }
 
 .vitrina__item__container1:hover .vitrina__item__favoriteButton{
