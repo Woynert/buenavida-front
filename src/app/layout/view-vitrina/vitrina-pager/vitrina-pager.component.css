@@ -38,3 +38,6 @@
 	margin-right: 5px;
 }
 
+.vitrina__pageButton__container:hover{
+	cursor: pointer;
+}

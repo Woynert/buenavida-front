@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef,HostListener } from '@angular/core';
 import { SearchService, SearchResponse } from '@service/search.service';
 
 @Component({
@@ -9,10 +9,11 @@ import { SearchService, SearchResponse } from '@service/search.service';
 export class HeaderComponent implements OnInit {
 
 	@ViewChild("searchBarInput") searchBarInput!: ElementRef<HTMLInputElement>;
+	public styleDisplay = "display:none";
 
 	constructor(
 		public searchService: SearchService
-	) { }
+	) {}
 
 	ngOnInit(): void {
 	}
@@ -25,4 +26,11 @@ export class HeaderComponent implements OnInit {
 		this.searchService.setSearchTerm(this.searchBarInput.nativeElement.value);	
 	}
 
+	showMyMenu(): void {
+		this.styleDisplay = "display:block";
+	}
+
+	hideMyMenu(): void {
+		this.styleDisplay = "display:none";
+	}
 }

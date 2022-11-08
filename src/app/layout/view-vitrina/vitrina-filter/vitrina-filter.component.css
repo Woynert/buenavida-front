@@ -153,3 +153,7 @@
 	margin: auto;
 	margin-top: 10px;
 }
+
+.numFilter__submmit:hover{
+    cursor: pointer;
+}

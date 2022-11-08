@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { ClickOutsideModule } from 'ng-click-outside';
 
 // vitrina
 import { ViewVitrinaComponent } from '@layout/view-vitrina/view-vitrina.component';
@@ -34,6 +35,7 @@ import { HeaderComponent } from '@shared/header/header.component';
 		HttpClientModule,
 		ReactiveFormsModule,
 		FormsModule,
+		ClickOutsideModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
