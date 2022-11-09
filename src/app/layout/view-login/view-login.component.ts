@@ -38,7 +38,7 @@ export class ViewLoginComponent implements OnInit {
 	}
 
 	//Validate Form
-	access() {
+	async access() {
 
 		this.error_psw = "";
 		this.error_email = "";
@@ -73,30 +73,18 @@ export class ViewLoginComponent implements OnInit {
 
 		// make request
 
-		let form = {
+		const form = {
 			"email": this.email,
 			"password":this.password
 		};
 
-		this.sessionService.logIn(form).subscribe({
-			next: data => {
-				this.message = data.message;
-				this.logIn = true;
-			},
-			error: error => {
-				this.message = error.error.message;
-				this.logIn = false;
-			}
-		});
-
-		const checkMessagePost = setInterval(() => {
-			if (this.message != ""){
-				this.pass_msg = this.message;
-				clearInterval(checkMessagePost);
-				if (this.logIn) {
-					this.router.navigate(['/']);
-				}
-			}
-		}, 500);
+		try{
+			const resp = await this.sessionService.logIn(form);
+			// logged in -> redirect to home
+			this.router.navigate(['/']);
+		}
+		catch(e){
+			if (e instanceof Error) this.pass_msg = e.message;
+		}
 	}
 }

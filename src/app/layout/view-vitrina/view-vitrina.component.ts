@@ -3,7 +3,9 @@ import { Subscription } from 'rxjs';
 
 import { Product, iEventApplyPriceFilter } from '@shared/interface';
 import { SearchService, SearchResponse } from '@service/search.service';
+import { FavoritesService } from '@service/favorites.service';
 
+import { iUserInfo } from '@shared/interface';
 import { CartService } from '@service/cart.service';
 
 @Component({
@@ -14,6 +16,7 @@ import { CartService } from '@service/cart.service';
 export class ViewVitrinaComponent implements OnInit {
 
 	searchTermSubscription: Subscription = Subscription.EMPTY;
+	userInfoSubscription: Subscription = Subscription.EMPTY;
 
 	products    : Product[] = [];
 	totalPages  : number  = 0;
@@ -24,10 +27,12 @@ export class ViewVitrinaComponent implements OnInit {
 
 	constructor(
 		public searchService: SearchService,
+		public favoritesService: FavoritesService,
 		public cartService: CartService
 	) { }
 
 	ngOnInit(): void {
+		// get products
 		this.getProductsFromSearch();
 
 		// get search term from topbar
@@ -37,6 +42,15 @@ export class ViewVitrinaComponent implements OnInit {
 				this.selectedPage = 0;
 				this.getProductsFromSearch();
 			});
+
+		// user info was updated
+		this.userInfoSubscription = this.favoritesService.subjectUser.subscribe(
+			(info: iUserInfo) => {
+				this.matchFavorites();
+			});
+
+		// get user info if there is a session
+		this.favoritesService.fetchUserInfo();
 	}
 
 	// make search
@@ -46,6 +60,7 @@ export class ViewVitrinaComponent implements OnInit {
 		.subscribe((res: SearchResponse) => {
 			this.products      = res.products;
 			this.totalPages    = Math.ceil(res.totalcount / 12); // 12 items per page
+			this.matchFavorites();
 		});
 	}
 
@@ -61,6 +76,48 @@ export class ViewVitrinaComponent implements OnInit {
 		this.maxPrice = filter.maxPrice;
 		this.selectedPage = 0;
 		this.getProductsFromSearch();
+	}
+
+	// favorites
+
+	async addToFavorites(itemid: string) {
+		await this.favoritesService.addToFavorites(itemid);
+		await this.favoritesService.fetchUserInfo();
+		this.matchFavorites();
+	}
+
+	async removeFromFavorites(itemid: string) {
+		await this.favoritesService.removeFromFavorites(itemid);
+		await this.favoritesService.fetchUserInfo();
+		this.matchFavorites();
+	}
+
+	// tag some products as favorite
+
+	matchFavorites() {
+
+		if (!this.favoritesService.currentUser)
+			return;
+
+		const userInfo: iUserInfo = this.favoritesService.currentUser!;
+
+		if (userInfo.favorites){
+
+			// iterate products
+			this.products.forEach((product: Product) => {
+				product.favorite = userInfo.favorites.some((fav: Product) => {
+					return (product._id == fav._id);
+				});
+			});
+		}
+		else{
+
+			// iterate products
+			this.products.forEach((product: Product) => {
+				product.favorite = false;
+			});
+		}
+
 	}
 
 	addProduct(product: Product){

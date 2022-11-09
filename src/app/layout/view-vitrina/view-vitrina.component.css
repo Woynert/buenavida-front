@@ -135,6 +135,10 @@
 	display: none;
 }
 
+.vitrina__item__favoriteButton--active{
+	display: block !important;
+}
+
 .vitrina__item__favoriteButton{
 	position: absolute;
 	right: 0;
@@ -143,8 +147,8 @@
 	display: none;
 }
 
-.vitrina__item__favoriteIcon{
-	
+.vitrina__item__favoriteIcon:hover{
+	cursor: pointer;
 }
 
 .vitrina__item__discount{

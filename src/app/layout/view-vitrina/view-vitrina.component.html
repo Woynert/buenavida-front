@@ -10,8 +10,21 @@
 						<div *ngFor="let product of products" class="vitrina__item" id="vitrina__item">
 							<div class="vitrina__item__container1">
 								<div class="vitrina__item__container2">
-									<div class="vitrina__item__favoriteButton">
-										<img class="vitrina__item__favoriteIcon" src="/assets/icon/heart.svg"/>
+
+									<!-- mostrar cuando esta en favoritos -->
+									<div
+										[class.vitrina__item__favoriteButton--active]="(product.favorite)"
+										class="vitrina__item__favoriteButton">
+										<img
+											[style.display]="(!product.favorite) ? 'block' : 'none'"
+											(click)="addToFavorites(product._id)"
+											class="vitrina__item__favoriteIcon" src="/assets/icon/heart.svg"
+										/>
+										<img
+											[style.display]="(product.favorite) ? 'block' : 'none'"
+											(click)="removeFromFavorites(product._id)"
+											class="vitrina__item__favoriteIcon" src="/assets/icon/heart-fill.svg"
+										/>
 									</div>
 									<div *ngIf="product.discount > 0" class="vitrina__item__discount"><div>{{product.discount}}%</div></div>
 									<div class="vitrina__item__imgContainer">
