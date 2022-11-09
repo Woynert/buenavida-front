@@ -8,7 +8,9 @@
 
 						<!--base vitrina item-->
 						<div *ngFor="let product of products" class="vitrina__item" id="vitrina__item">
-							<div class="vitrina__item__container1">
+							<div
+								(click)="selectProduct(product)"
+								class="vitrina__item__container1">
 								<div class="vitrina__item__container2">
 
 									<!-- mostrar cuando esta en favoritos -->
@@ -17,15 +19,16 @@
 										class="vitrina__item__favoriteButton">
 										<img
 											[style.display]="(!product.favorite) ? 'block' : 'none'"
-											(click)="addToFavorites(product._id)"
+											(click)="$event.stopPropagation(); addToFavorites(product._id)"
 											class="vitrina__item__favoriteIcon" src="/assets/icon/heart.svg"
 										/>
 										<img
 											[style.display]="(product.favorite) ? 'block' : 'none'"
-											(click)="removeFromFavorites(product._id)"
+											(click)="$event.stopPropagation(); removeFromFavorites(product._id)"
 											class="vitrina__item__favoriteIcon heart-fill" src="/assets/icon/heart-fill.svg"
 										/>
 									</div>
+
 									<div *ngIf="product.discount > 0" class="vitrina__item__discount"><div>{{product.discount}}%</div></div>
 									<div class="vitrina__item__imgContainer">
 										<img class="vitrina__item__img" [src]="product.imageurl"/>
@@ -33,7 +36,7 @@
 									<div class="vitrina__item__title">{{product.title}}</div>
 									<div class="vitrina__item__units">{{product.units}}</div>
 									<div class="vitrina__item__price">{{product.price}} €</div>
-									<div class="vitrina__item__buyButton" (click)="addProduct(product)">
+									<div class="vitrina__item__buyButton" (click)="$event.stopPropagation(); addProduct(product)">
 										<img class="vitrina__item__favoriteIcon img_shopping_cart" src="/assets/icon/bag-plus-fill.svg"/>
 										Añadir a la cesta
 									</div>
@@ -58,3 +61,59 @@
 	class="sidebar"
 	(eventApplyPriceFilter)="eventApplyPriceFilter($event)"
 ></app-vitrina-filter>
+
+<!-- Product modal window -->
+
+<div *ngIf="selectedProduct" class="modalProduct">
+	<div class="modalProduct__grid">
+		<div class="modalProduct__imgContainer">
+			<img class="modalProduct__img" [src]="selectedProduct.imageurl">
+		</div>
+		<div class="modalProduct__descGrid">
+			<div class="modalProduct__body">
+
+				<div class="modalProduct__favoriteButton">
+
+					<!-- mostrar cuando esta en favoritos -->
+					<div
+						style="display: block !important;"
+						class="vitrina__item__favoriteButton">
+						<img
+							[style.display]="(!selectedProduct.favorite) ? 'block' : 'none'"
+							(click)="addToFavorites(selectedProduct._id)"
+							class="vitrina__item__favoriteIcon" src="/assets/icon/heart.svg"
+						/>
+						<img
+							[style.display]="(selectedProduct.favorite) ? 'block' : 'none'"
+							(click)="removeFromFavorites(selectedProduct._id)"
+							class="vitrina__item__favoriteIcon" src="/assets/icon/heart-fill.svg"
+						/>
+					</div>
+				</div>
+
+				<div class="modalProduct__title">{{selectedProduct.title}}</div>
+				<div class="modalProduct__price">{{selectedProduct.price}} €</div>
+				<div class="modalProduct__content">{{selectedProduct.description}}</div>
+			</div>
+			<div class="modalProduct__bottom">
+				<input class="modalProduct__numeric" type="number" min="1"
+					[(ngModel)]="selectedProduct.quantity"
+					(change)="this.cartService.quantityChange(selectedProduct.quantity, selectedProduct)"
+					>
+				<div class="modalProduct__bottomButtons">
+					<div
+						(click)="deselectProduct()"
+						class="modalProduct__closeButton">
+						Cerrar
+					</div>
+					<div
+						(click)="this.cartService.addProduct(selectedProduct, selectedProduct.quantity)"
+						class="modalProduct__buyButton">
+						<img class="modalProduct__buyButton__icon img_shopping_cart" src="/assets/icon/bag-plus-fill.svg"/>
+						Añadir al carrito
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

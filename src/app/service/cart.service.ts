@@ -37,7 +37,7 @@ export class CartService {
 				if (element.product._id == product._id) {
 					let quantity_product = {
 						product: product,
-						quantity: element.quantity + quantity
+						quantity: element.quantity + 1
 					}
 					duplicate = true;
 					products[i] = quantity_product;
@@ -80,20 +80,26 @@ export class CartService {
 		}
 	}
 
-	quantityChange(quantity:number,product: Product): void {  
+	quantityChange(quantity:number, product: Product): void {  
 		if (localStorage.getItem("cart") != null) {
 			let products = JSON.parse(localStorage.getItem("cart") || "")
-			for (let i = 0; i < products.length; i++) {
-				let element = products[i];
-				if (element.product._id == product._id) {
-					let quantity_product = {
-						product: product,
-						quantity: quantity
+
+			if (products.some((p: ProductsCart) => { return (p.product._id == product._id) }))
+			{
+
+				for (let i = 0; i < products.length; i++) {
+					let element = products[i];
+					if (element.product._id == product._id) {
+						let quantity_product = {
+							product: product,
+							quantity: quantity
+						}
+						products[i] = quantity_product;
 					}
-					products[i] = quantity_product;
 				}
+				localStorage.setItem('cart', JSON.stringify(products));
 			}
-			localStorage.setItem('cart', JSON.stringify(products));
+
 			this.subject.next('change');
 		}
 		this.calculateCart();

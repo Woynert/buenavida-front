@@ -23,6 +23,7 @@
 	--color-border-pageButton: #d7d7d7;
 	--color-border-dobleRange: #1b53c0;
 	--color-line-body: #929292;
+	--background-color-modal-item: rgba(0, 0, 0, 0.314);
 	--color-background-shadow-cart-modal: rgba(0,0,0,0.4);
 	--color-background-cart-modal: #fefefe;
 	--color-heart-fill: invert(12%) sepia(82%) saturate(7463%) hue-rotate(357deg) brightness(100%) contrast(113%);
