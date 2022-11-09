@@ -1,7 +1,56 @@
 <div class="mainCartParent">
-	<div class="mainCart CC">
-		
-		Lorem ipsum dolor sit amet. Aut numquam odit et repudiandae repellat et repellat impedit ad similique neque est voluptatibus quaerat. At voluptas illum sed doloremque labore rem temporibus dolores et nemo error et provident omnis. Qui earum rerum et expedita sapiente At blanditiis rerum sit asperiores quia sit recusandae nulla. Eum vitae numquam id obcaecati voluptates qui fuga consequatur.
-
+	<div class="title_page">
+		<h1>Esta es tu cesta de la compra</h1>
 	</div>
+
+	<div class="nav-product">
+		<p class="title_div_product" *ngIf="(total_productos)==1;else oneItem">{{total_productos}} Articulo</p>
+		<ng-template #oneItem>
+			<p class="p_free_shipping">{{total_productos}} Articulos</p>
+		</ng-template>
+		<div class="div_product">
+			<div *ngFor="let product of productsCart" class="list-show-product">
+				<div class="grid-list-show-product img_list_product">
+					<img class="list_car_img" [src]="product.product.imageurl"/>
+				</div>
+				<div class="grid-list-show-product content_list_product">
+					<p class="p_title_list_product">{{product.product.title.toUpperCase()}}</p>
+					<p class="p_quantity_list_product">Talla: {{product.product.units}}</p>
+				</div>
+				<div class="grid-list-show-product content_list_product_val">
+					<p class="p_letter_list_product">Cantidad</p>
+					<input type="number" class="input_quantity_list_product"  min="1" [(ngModel)]="product.quantity" (change)="quantityChange(product.quantity,product.product)">
+					<p class="p_price_total_list_product">{{(product.product.price * product.quantity).toFixed(2)}} €</p>
+					<img  class="delete_img" src="/assets/icon/trash-fill.svg" (click)="removeItemCart(product.product)">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="content">
+		<div class="pay">
+			<h2>Resumen de tu pedido</h2>
+			<div class="conten_abstract">
+				<div class="subtotal_div_conten_abstract">
+					<p class="p_subtotal_conten_abstract">Subtotal</p>
+					<p class="p_number_subtotal_conten_abstract">{{subtotal.toFixed(2)}} €</p>
+				</div>
+				<div class="total_div_conten_abstract">
+					<p class="p_total_conten_abstract">TOTAL:</p>
+					<p class="p_number_total_conten_abstract">{{iva_include.toFixed(2)}} €</p>
+				</div>
+				<div class="no_shipping_div">
+					<p>(Envio No Incluido)</p>
+				</div>
+				<div class="div_make_order">
+					<button class="make_order_conten_abstract">Realizar pedido</button>
+				</div>
+				<div class="more_products">
+					<p routerLink="/" class="p_more_products">¿Quieres añadir mas productos?</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
 </div>
