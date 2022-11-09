@@ -135,6 +135,10 @@
 	display: none;
 }
 
+.vitrina__item__favoriteButton--active{
+	display: block !important;
+}
+
 .vitrina__item__favoriteButton{
 	position: absolute;
 	right: 0;

@@ -3,6 +3,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@environment';
 
+import { FavoritesService } from '@service/favorites.service';
+import { TokenService } from '@service/token.service';
 import { iUserInfo } from '@shared/interface';
 import { SignInI } from '@shared/signinI';
 import { LogInI } from '@shared/logInI';
@@ -14,10 +16,10 @@ import { MessageI } from '@shared/message';
 
 export class SessionService {
 
-	currentUser?: iUserInfo;
-
 	constructor(
-		private http: HttpClient
+		private http: HttpClient,
+		private favoritesService: FavoritesService,
+		private tokenService: TokenService
 	) { }
 
 	// /session/signin
@@ -29,12 +31,6 @@ export class SessionService {
 	}
 
 	// /session/login
-
-	//logIn(form: LogInI): Observable<MessageI> {
-		//let options = { withCredentials: true };
-		//const body=JSON.stringify(form);
-		//return this.http.post<MessageI>(`${environment.HOSTAPI}/session/login`, body, options)
-	//}
 	
 	async logIn(form: LogInI): Promise<string> {
 
@@ -42,12 +38,11 @@ export class SessionService {
 			const options = { withCredentials: true };
 			const body = JSON.stringify(form);
 			const msg = await this.http.post<MessageI>(`${environment.HOSTAPI}/session/login`, body, options).toPromise();
-			await this.getUserInfo();
+			await this.favoritesService.fetchUserInfo();
 			return msg!.message;
 		}
 		catch(e){
 			if (e instanceof HttpErrorResponse){
-				console.log(e.message);
 				if (e.error) throw new Error(e.error.message);
 			}
 
@@ -56,56 +51,4 @@ export class SessionService {
 
 	}
 
-	// /session/refresh
-	
-	async checkSession(): Promise<boolean> {
-
-		let options = {
-			observe: "response" as 'body',
-			withCredentials: true
-		};
-
-		// check access token is valid
-		try{
-			console.log("Checking Access token ...");
-			await this.http.get(`${environment.HOSTAPI}/session/ping`, options).toPromise();
-			console.log("Access token valid");
-			return true;
-		}
-		catch(e){
-			console.log("Access token invalid");
-		}
-
-		// try refresh token
-		try{
-			console.log("Trying to refresh ...");
-			await this.http.get(`${environment.HOSTAPI}/session/refresh`, options).toPromise();
-			console.log("Successfully refreshed");
-			return true;
-		}
-		catch(e){
-			console.log("Refresh token invalid");
-		}
-
-		// give up
-		return false;
-
-	}
-
-	// /user/info
-	async getUserInfo() {
-
-		if (!await this.checkSession())
-			return;
-
-		try{
-			let options = { withCredentials: true };
-			let user = await this.http.get<iUserInfo>(
-				`${environment.HOSTAPI}/user/info`, options).toPromise();
-			this.currentUser = user;
-		}
-		catch(e){
-			console.log(e);
-		}
-	}
 }
