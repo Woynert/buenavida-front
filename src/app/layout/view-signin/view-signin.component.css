@@ -7,14 +7,14 @@
 	margin-top: 3%;
 	margin-bottom: 3%;
 	padding-bottom: 3%;
-	border: 1px solid #d4d4d4;
+	border: 1px solid var(--color-border-div-forms);
 	padding-left: 5%;
 	padding-right: 5%;
 }
 
 .input_signin{
-	background-color: rgb(247, 246, 250);
-	border: 1px solid #d4d4d4;
+	background-color: var(--color-inputs-forms);
+	border: 1px solid var(--color-border-div-forms);
 	height: 40px;
 	width: 80%;
 	outline: none;
@@ -31,8 +31,8 @@
 	padding: 3px;
 	border-radius: 5px;
 	text-decoration: line-through;
-	color: #a0a0a0;
-	background-color: #0c0c0c;
+	color: var(--color-text-captcha);
+	background-color: var(--color-background-captcha);
 	user-select: none;
 	height: 80%;
 	text-align: center;
@@ -40,7 +40,7 @@
 }
 
 #reCaptcha{
-	border: 1px solid #d4d4d4;
+	border: 1px solid var(--color-border-div-forms);
 	height: 30px;
 	text-align: center;
 	width: 100%;
@@ -52,8 +52,8 @@
 	border-radius: 60px;
 	padding: 15px;
 	width: 80%;
-	background-color: #009929;
-	color: #ffffff;
+	background-color: var(--color-green-dark);
+	color: var(--color-white);
 	border: 0;
 	margin-bottom: 3%;
 	font-weight: bold;
@@ -62,8 +62,8 @@
 }
   
 .access:hover{
-	background-color: #efa229;
-	color: #000;
+	background-color: var(--color-orange);
+	color: var(--color-black);
 	cursor: pointer;
 }
   
@@ -71,8 +71,8 @@
 	border-radius: 60px;
 	padding: 15px;
 	width: 80%;
-	background-color: #2e55ff;
-	color: #ffffff;
+	background-color: var(--color-facebook);
+	color: var(--color-white);
 	border: 0;
 	font-weight: bold;
 	font-size: 16px;
@@ -80,18 +80,14 @@
 }
   
 .access_facebook:hover{
-	color: #000;
+	color: var(--color-black);
 	cursor: pointer;
 }
 
 /* Messages */
 
 .mesage_error{
-	color: #ef2947;
-}
-  
-.mesage_pass{
-	color: #5ccb5f;
+	color: var(--color-message-error);
 }
   
 .mesage_pws{
@@ -100,7 +96,7 @@
 }
   
 .errCaptcha{
-	color: #ef2947;
+	color: var(--color-message-error);
 	width: 80%;
 	text-align: center;
 }

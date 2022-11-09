@@ -8,6 +8,20 @@
 	left: 0;
 }
 
+@media (min-width: 300px) {
+	.sidebar{
+	  border-bottom: 1px solid #929292;
+	}
+  }
+  
+@media (min-width: 700px) {
+	.sidebar{
+	  border-right: 1px solid #929292;
+	  border-bottom: 0;
+	}
+}
+
+
 .mainVitrinaParent {
 	position: relative;
 	min-width: 100%;
@@ -63,7 +77,7 @@
 .vitrina__item__container1:hover .vitrina__item__container2{
 	position: absolute;
 	width: 110%;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	box-shadow: 0 4px 8px 0 var(--color-boxshadow-1), 0 6px 20px 0 var(--color-boxshadow-2);
 	z-index: 300;
 	padding: 0 10px 0 10px;
 	height: 110%;
@@ -91,7 +105,7 @@
 .vitrina__item__container2{
 	height: 100%;
 	width: 100%;
-	background: white; 
+	background: var(--color-white); 
 	margin: auto;
 	position: relative;
 }
@@ -113,7 +127,7 @@
 }
 
 .vitrina__item__units{
-	color: gray;
+	color: var(--color-gray);
 	text-align: center;
 	font-weight: bold;
 	font-size: 0.8em;
@@ -121,18 +135,32 @@
 
 .vitrina__item__price{
 	font-weight: bold;
-	color: green;
+	color: var(--color-green-dark);
 	text-align: center;
 }
 
 .vitrina__item__buyButton{
-	background: orange;
+	background: var(--color-orange);
 	border-radius: 90px;
 	padding: 10px;
-	color: white;
+	color: var(--color-white);
 	width: fit-content;
 	margin: auto;
 	display: none;
+	font-weight: bold;
+}
+
+.img_shopping_cart{
+	filter: var(--color-shopping-normal);
+}
+
+.vitrina__item__buyButton:hover	{
+	background: var(--color-green-light);
+	color: var(--color-black);
+}
+
+.vitrina__item__buyButton:hover	.img_shopping_cart{
+	filter: var(--color-shopping-hover);
 }
 
 .vitrina__item__favoriteButton--active{
@@ -147,6 +175,11 @@
 	display: none;
 }
 
+
+.heart-fill{
+	filter: var(--color-heart-fill);
+}
+
 .vitrina__item__favoriteIcon:hover{
 	cursor: pointer;
 }
@@ -156,14 +189,15 @@
 	left: 0;
 	margin-top: 10px;
 	margin-left: 10px;
-	background: red;
-	color: white;
+	background: var(--color-discount);
+	color: var(--color-white);
 	border-radius: 90px;
-	height: 50px;
-	width: 50px;
+	height: 45px;
+	width: 45px;
 	display: flex;
 	justify-content: center;
 	text-align: center;
 	align-items: center;
+	font-weight: bold;
 }
 

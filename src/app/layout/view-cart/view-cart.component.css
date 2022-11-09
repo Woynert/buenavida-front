@@ -87,14 +87,14 @@
 
 .p_letter_list_product{
   margin-right: 5%;
-  color: #aaaaaa;
+  color: var(--color-no-note-cart);
 }
 
 .input_quantity_list_product{
   width: 60px;
   height: 40px;
   text-align: center;
-  color: #5ccb5f;
+  color: var(--color-green-light);
 }
 
 .p_price_total_list_product{
@@ -114,7 +114,7 @@
 }
 
 .pay {
-  background-color: rgb(250, 250, 250);
+  background-color: var(--color-background-pay);
   height: 100%;
   padding: 30px;
 }
@@ -130,8 +130,8 @@
 }
 
 .make_order_conten_abstract {
-  background-color: #5ccb5f;
-  color: #fff;
+  background-color: var(--color-green-light);
+  color: var(--color-white);
   border: 0;
   margin-bottom: 2%;
   border-radius: 60px;
@@ -142,25 +142,25 @@
 }
 
 .make_order_conten_abstract:hover{
-  background-color: #efa229;
-  color: #000;
+  background-color: var(--color-orange);
+  color: var(--color-black);
   cursor: pointer;
 }
 
 .p_more_products{
   text-decoration: underline;
-  color: #5ccb5f;
+  color: var(--color-green-light);
   font-weight: bold;
 }
 
 .p_more_products:hover{
   cursor: pointer;
-  color: #efa229;
+  color: var(--color-orange);
 }
 
 .no_shipping_div{
   padding-left: 20px;
-  color: #aaaaaa;
+  color: var(--color-no-note-cart);
   margin-top: 0;
 }
 
@@ -169,7 +169,7 @@
 }
 
 .p_quantity_list_product{
-  color: #aaaaaa;
+  color: var(--color-no-note-cart);
 }
 
 .delete_img {
