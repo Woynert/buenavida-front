@@ -1,5 +1,5 @@
 <div class="mainVitrinaParent">
-	<div class="mainVitrina CC">
+	<div class="mainVitrina">
 		
 				<div class="vitrina__container">
 
@@ -25,7 +25,7 @@
 										<img
 											[style.display]="(product.favorite) ? 'block' : 'none'"
 											(click)="$event.stopPropagation(); removeFromFavorites(product._id)"
-											class="vitrina__item__favoriteIcon" src="/assets/icon/heart-fill.svg"
+											class="vitrina__item__favoriteIcon heart-fill" src="/assets/icon/heart-fill.svg"
 										/>
 									</div>
 
@@ -37,7 +37,7 @@
 									<div class="vitrina__item__units">{{product.units}}</div>
 									<div class="vitrina__item__price">{{product.price}} €</div>
 									<div class="vitrina__item__buyButton" (click)="$event.stopPropagation(); addProduct(product)">
-										<img class="vitrina__item__favoriteIcon" src="/assets/icon/bag-plus-fill.svg"/>
+										<img class="vitrina__item__favoriteIcon img_shopping_cart" src="/assets/icon/bag-plus-fill.svg"/>
 										Añadir a la cesta
 									</div>
 								</div>
@@ -58,7 +58,7 @@
 </div>
 
 <app-vitrina-filter
-	class="sidebar CB"
+	class="sidebar"
 	(eventApplyPriceFilter)="eventApplyPriceFilter($event)"
 ></app-vitrina-filter>
 
@@ -109,7 +109,7 @@
 					<div
 						(click)="this.cartService.addProduct(selectedProduct, selectedProduct.quantity)"
 						class="modalProduct__buyButton">
-						<img class="modalProduct__buyButton__icon" src="/assets/icon/bag-plus-fill.svg"/>
+						<img class="modalProduct__buyButton__icon img_shopping_cart" src="/assets/icon/bag-plus-fill.svg"/>
 						Añadir al carrito
 					</div>
 				</div>

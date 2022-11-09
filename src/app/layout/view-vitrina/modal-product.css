@@ -5,7 +5,7 @@
 	position: fixed;
 	width: 100%;
 	height: 100%;
-	background: #00000050;
+	background: var(--background-color-modal-item);
 	display: grid;
 	justify-content: center;
 	align-content: center;
@@ -17,12 +17,12 @@
 	display: grid;
 	grid-template-columns: 30% auto;
 	padding: 20px;
-	background: white;
+	background: var(--color-white);
 	border-radius: 10px;
 }
 
 .modalProduct__imgContainer{
-	background: white;
+	background: var(--color-white);
 }
 
 .modalProduct__img{
@@ -39,7 +39,7 @@
 .modalProduct__body{
 	width: 100%;
 	height: 100%;
-	background: white;
+	background: var(--color-white);
 	position: relative;
 	overflow-y: scroll;
 }
@@ -52,7 +52,7 @@
 .modalProduct__bottom{
 	width: 100%;
 	height: 100%;
-	background: white;
+	background: var(--color-white);
 	position: relative;
 }
 
@@ -61,36 +61,57 @@
 	position: absolute;
 	left: 0px;
 	height: 100%;
+	color: var(--color-green-light);
 }
 
 .modalProduct__bottomButtons{
 	position: absolute;
 	right: 0px;
+	font-weight: bold;
 }
 
 .modalProduct__closeButton{
-	background: gray;
+	background: var(--color-gray);
 	border-radius: 90px;
 	padding: 10px;
-	color: white;
+	color: var(--color-white);
 	width: fit-content;
 	margin: auto;
 	display: inline-block;
+}
+
+.modalProduct__closeButton:hover{
+	cursor: pointer;
 }
 
 .modalProduct__buyButton{
-	background: orange;
+	background: var(--color-orange);
 	border-radius: 90px;
 	padding: 10px;
-	color: white;
+	color: var(--color-white);
 	width: fit-content;
 	margin: auto;
 	display: inline-block;
 }
 
+.img_shopping_cart{
+	filter: var(--color-shopping-normal);
+}
+
+.modalProduct__buyButton:hover .img_shopping_cart{
+	filter: var(--color-shopping-hover);
+}
+
+.modalProduct__buyButton:hover	{
+	background: var(--color-green-light);
+	color: var(--color-black);
+	cursor: pointer;
+}
+
+
 .modalProduct__buyButton__icon svg{
-	color: white;
-	fill: white;
+	color: var(--color-white);
+	fill: var(--color-white);
 }
 
 /*modalProduct body*/
@@ -101,12 +122,12 @@
 }
 
 .modalProduct__price{
-	color: green;
+	color: var(--color-green-dark);
 	font-size: 1.3em;
 	margin-bottom: 20px;
 	font-weight: bold;
 }
 
 .modalProduct__description{
-	color: gray;
+	color: var(--color-gray);
 }

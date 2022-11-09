@@ -2,7 +2,7 @@
 /* VITRINA PAGE CONTROLS */
 
 .vitrina__pageControls{
-	background: white;
+	background: var(--color-white);
 	width: 100%;
 	height: 100%;
 }
@@ -21,12 +21,12 @@
 }
 
 .vitrina__pageButton--selected{
-	color: green;
+	color: var(--color-green-light);
 }
 
 .vitrina__pageButton__container{
-	background: white;
-	border-color: #d7d7d7;
+	background: var(--color-white);
+	border-color: var(--color-border-pageButton);
 	border-style: solid;
 	border-width: 1px;
 	width: 35px;
