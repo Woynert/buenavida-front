@@ -4,6 +4,7 @@
 .sidebar__expandable{
 	width: 100%;
 	height: fit-content;
+	padding: 5px;
 }
 
 .sidebar__expandable__header{
