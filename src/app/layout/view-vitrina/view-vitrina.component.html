@@ -8,7 +8,9 @@
 
 						<!--base vitrina item-->
 						<div *ngFor="let product of products" class="vitrina__item" id="vitrina__item">
-							<div class="vitrina__item__container1">
+							<div
+								(click)="selectProduct(product)"
+								class="vitrina__item__container1">
 								<div class="vitrina__item__container2">
 									<div class="vitrina__item__favoriteButton">
 										<img class="vitrina__item__favoriteIcon" src="/assets/icon/heart.svg"/>
@@ -45,3 +47,39 @@
 	class="sidebar CB"
 	(eventApplyPriceFilter)="eventApplyPriceFilter($event)"
 ></app-vitrina-filter>
+
+<!-- Product modal window -->
+
+<div *ngIf="selectedProduct" class="modalProduct">
+	<div class="modalProduct__grid">
+		<div class="modalProduct__imgContainer">
+			<img class="modalProduct__img" [src]="selectedProduct.imageurl">
+		</div>
+		<div class="modalProduct__descGrid">
+			<div class="modalProduct__body">
+				<div class="modalProduct__favoriteButton">
+					<img class="modalProduct__favoriteButton__icon" src="/assets/icon/heart.svg"/>
+				</div>
+				<div class="modalProduct__title">{{selectedProduct.title}}</div>
+				<div class="modalProduct__price">{{selectedProduct.price}} €</div>
+				<div class="modalProduct__content">{{selectedProduct.description}}</div>
+			</div>
+			<div class="modalProduct__bottom">
+				<input class="modalProduct__numeric" type="number" min="1" max="100" value="1">
+				<div class="modalProduct__bottomButtons">
+					<div
+						(click)="deselectProduct()"
+						class="modalProduct__closeButton">
+						Cerrar
+					</div>
+					<div
+						(click)="addProduct(selectedProduct)"
+						class="modalProduct__buyButton">
+						<img class="modalProduct__buyButton__icon" src="/assets/icon/bag-plus-fill.svg"/>
+						Añadir al carrito
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
