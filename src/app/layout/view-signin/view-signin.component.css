@@ -46,8 +46,61 @@
 	width: 100%;
 	outline: none;
 }
+/* Buttons */
 
-.access_facebook:hover, .access:hover{
+.access{
+	border-radius: 60px;
+	padding: 15px;
+	width: 80%;
+	background-color: #009929;
+	color: #ffffff;
+	border: 0;
+	margin-bottom: 3%;
+	font-weight: bold;
+	font-size: 16px;
+	margin-left: 10%;
+}
+  
+.access:hover{
+	background-color: #efa229;
+	color: #000;
+	cursor: pointer;
+}
+  
+.access_facebook{
+	border-radius: 60px;
+	padding: 15px;
+	width: 80%;
+	background-color: #2e55ff;
+	color: #ffffff;
+	border: 0;
+	font-weight: bold;
+	font-size: 16px;
+	margin-left: 10%;
+}
+  
+.access_facebook:hover{
+	color: #000;
 	cursor: pointer;
 }
 
+/* Messages */
+
+.mesage_error{
+	color: #ef2947;
+}
+  
+.mesage_pass{
+	color: #5ccb5f;
+}
+  
+.mesage_pws{
+	width: 90%;
+	font-size: 14px;
+}
+  
+.errCaptcha{
+	color: #ef2947;
+	width: 80%;
+	text-align: center;
+}

@@ -16,7 +16,10 @@
 		</div>
 
 		<!--Mis favoritos-->
-		<div class="headerButton">
+		<div
+			*ngIf="tokenService.activeSession"
+			class="headerButton"
+			>
 			<div class="headerButton__container" id="headerButton__favorites">
 				<div class="headerButton__icon">
 					<img src="/assets/icon/heart.svg">
@@ -38,8 +41,19 @@
 				<a href="#"><img src="/assets/icon/person-fill.svg" class="img_dropdown"> Mi cuenta</a>
 				<a href="#"><img src="/assets/icon/heart.svg" class="img_dropdown"> Mis Favoritos</a>
 				<a routerLink="/cart"><img src="/assets/icon/check-lg.svg" class="img_dropdown"> Mi carrito</a>
-				<a routerLink="/login"><img src="/assets/icon/lock.svg" class="img_dropdown"> Entrar</a>
-				<a routerLink="/signin"><img src="/assets/icon/person-plus-fill.svg" class="img_dropdown"> Crear una cuenta</a>
+				<a
+					*ngIf="!tokenService.activeSession"
+					routerLink="/login"
+					><img src="/assets/icon/lock.svg" class="img_dropdown"> Entrar</a>
+				<a
+					*ngIf="!tokenService.activeSession"
+					routerLink="/signin"
+					><img src="/assets/icon/person-plus-fill.svg" class="img_dropdown"> Crear una cuenta</a>
+				<a 
+					*ngIf="tokenService.activeSession"
+					(click)="sessionService.logOut()"
+					routerLink="/"
+					><img src="/assets/icon/person-plus-fill.svg" class="img_dropdown">Cerrar sesión</a>
 			</div>
 
 		</div>
@@ -49,6 +63,7 @@
 			<div class="headerButton__container" id="headerButton__cart" (click)="openModalCart()">
 				<div class="headerButton__icon">
 					<img src="/assets/icon/basket3.svg">
+					<span class="badge" *ngIf="(numbetCart)>0">{{numbetCart}}</span>
 				</div>
 				<div class="headerButton__label">Mi carrito</div>
 			</div>
@@ -89,7 +104,7 @@
 				</ng-template>
 			</div>
 			<button (click)="goCart()" class="go_cart_button">Ir al carrito</button>
-			<button class="make_order_button">Realizar Pedido</button>
+			<button (click)="payment()" class="make_order_button">Realizar Pedido</button>
 			<br>
 			<br>
 			<div class="list_products_modal" id="list_products_modal"></div>

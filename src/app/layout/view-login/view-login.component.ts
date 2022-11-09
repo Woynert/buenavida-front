@@ -38,7 +38,7 @@ export class ViewLoginComponent implements OnInit {
 	}
 
 	//Validate Form
-	access() {
+	async access() {
 
 		this.error_psw = "";
 		this.error_email = "";
@@ -57,46 +57,34 @@ export class ViewLoginComponent implements OnInit {
 		}
 
 		if (this.email === '') {
-			this.error_email  = "Please enter your email";
+			this.error_email  = "Por favor ingrese un correo";
 			return;
 		}
 
 		else if (regex_email.test(this.email) == false){
-			this.error_email = "Please enter a valid email"
+			this.error_email = "Por favor ingrese un correo valido"
 			return;
 		}
 
 		if (this.password === '') {
-			this.error_psw = "Please enter your password";
+			this.error_psw = "Por favor ingrese una contraseña";
 			return;
 		}
 
 		// make request
 
-		let form = {
+		const form = {
 			"email": this.email,
 			"password":this.password
 		};
 
-		this.sessionService.logIn(form).subscribe({
-			next: data => {
-				this.message = data.message;
-				this.logIn = true;
-			},
-			error: error => {
-				this.message = error.error.message;
-				this.logIn = false;
-			}
-		});
-
-		const checkMessagePost = setInterval(() => {
-			if (this.message != ""){
-				this.pass_msg = this.message;
-				clearInterval(checkMessagePost);
-				if (this.logIn) {
-					this.router.navigate(['/']);
-				}
-			}
-		}, 500);
+		try{
+			const resp = await this.sessionService.logIn(form);
+			// logged in -> redirect to home
+			this.router.navigate(['/']);
+		}
+		catch(e){
+			if (e instanceof Error) this.pass_msg = e.message;
+		}
 	}
 }

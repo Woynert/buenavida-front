@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { CartService } from '@service/cart.service';
 
@@ -12,21 +13,26 @@ import { ProductsCart } from '@shared/ProductsCart';
 })
 export class ViewCartComponent implements OnInit {
 
-  public total_productos:number = 0;
+  	public total_productos:number = 0;
 	public productsCart: ProductsCart[] = [];
 	public subtotal:number = 0;
 	public iva_include:number = 0;
 	public numbetChange:number = 0;
+	public subscription: Subscription;
 
-  constructor(
-    public cartService: CartService
-  ) { }
+	constructor(
+		public cartService: CartService
+	) {
+		this.subscription = this.cartService.updateCart().subscribe(message => {
+			this.calculateCart();
+		});
+	 }
 
-  ngOnInit(): void {
-    this.calculateCart();
-  }
+	ngOnInit(): void {
+    	this.calculateCart();
+	}
 
-  calculateCart(): void {
+	calculateCart(): void {
 		this.cartService.calculateCart();
 		this.productsCart = this.cartService.productsCart;
 		this.total_productos = this.cartService.total_productos;
@@ -34,13 +40,15 @@ export class ViewCartComponent implements OnInit {
 		this.iva_include = this.cartService.iva_include;
 	}
 
-  quantityChange(quantity:number,product: Product): void {  
+	quantityChange(quantity:number,product: Product): void {  
 		this.cartService.quantityChange(quantity,product);
-		this.calculateCart();
 	}
 
 	removeItemCart(product: Product): void {
 		this.cartService.removeItemCart(product);
-		this.calculateCart();
+	}
+
+	async payment() {
+		await this.cartService.payment();
 	}
 }
