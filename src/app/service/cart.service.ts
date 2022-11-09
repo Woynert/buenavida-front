@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
+import { environment } from '@environment';
+import { HttpClient } from '@angular/common/http';
 
 import { ProductsCart } from '@shared/ProductsCart';
 import { Product } from '@shared/interface';
+import { MessageI } from '@shared/message';
+import { ToastrService } from 'ngx-toastr';
+
+import { TokenService } from '@service/token.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -14,7 +20,11 @@ export class CartService {
 	public iva_include:number = 0;
 	public numbetChange:number = 0;
 
-	constructor() { }
+	constructor(
+		private tokenService: TokenService,
+		private http: HttpClient,
+		private toastr: ToastrService
+	) { }
 
 	addProduct(product: Product,quantity: number){
 		let duplicate = false;								
@@ -100,6 +110,39 @@ export class CartService {
 			}
 		}
 		this.calculateCart();
+	}
+
+	async payment() {
+		if (!await this.tokenService.checkSession()){
+			this.toastr.error("Porfavo Iniciar Sección", '');
+			return;
+		}
+
+		// action
+		try{
+			let options = { withCredentials: true };
+			if (localStorage.getItem("cart") != null) {
+				let products = JSON.parse(localStorage.getItem("cart") || "")
+				if (products.length>0){
+					let products_payment = []
+					for (let i = 0; i < products.length; i++) {
+						let element = products[i];
+						let add_payment ={
+							"itemid": element.product._id,
+							"quantity": element.quantity
+						}
+						products_payment.push(add_payment);
+					}
+					let asd = await this.http.post<MessageI>(
+					`${environment.HOSTAPI}/payment`,products_payment, options).toPromise();
+					this.toastr.success('Item removed from favorites', '');
+				}
+			}
+			
+		}
+		catch(e){
+			this.toastr.error("Couldn't remove item from favorites", '');
+		}
 	}
 
 	

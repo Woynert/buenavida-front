@@ -86,4 +86,8 @@ export class HeaderComponent implements OnInit {
 		this.closeModalCart();
 		this.router.navigate(['/cart']);
 	}
+
+	payment(): void {
+		this.cartService.payment();
+	}
 }
