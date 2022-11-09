@@ -6,6 +6,7 @@ import { SearchService, SearchResponse } from '@service/search.service';
 import { FavoritesService } from '@service/favorites.service';
 
 import { iUserInfo } from '@shared/interface';
+import { CartService } from '@service/cart.service';
 
 @Component({
 	selector: 'app-view-vitrina',
@@ -26,7 +27,8 @@ export class ViewVitrinaComponent implements OnInit {
 
 	constructor(
 		public searchService: SearchService,
-		public favoritesService: FavoritesService
+		public favoritesService: FavoritesService,
+		public cartService: CartService
 	) { }
 
 	ngOnInit(): void {
@@ -116,6 +118,10 @@ export class ViewVitrinaComponent implements OnInit {
 
 
 		console.log(this.products);
+	}
+
+	addProduct(product: Product){
+		this.cartService.addProduct(product,1);
 	}
 
 }

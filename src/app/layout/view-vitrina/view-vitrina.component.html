@@ -33,7 +33,7 @@
 									<div class="vitrina__item__title">{{product.title}}</div>
 									<div class="vitrina__item__units">{{product.units}}</div>
 									<div class="vitrina__item__price">{{product.price}} €</div>
-									<div class="vitrina__item__buyButton">
+									<div class="vitrina__item__buyButton" (click)="addProduct(product)">
 										<img class="vitrina__item__favoriteIcon" src="/assets/icon/bag-plus-fill.svg"/>
 										Añadir a la cesta
 									</div>
