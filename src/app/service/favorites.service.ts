@@ -26,8 +26,10 @@ export class FavoritesService {
 	async addToFavorites(itemid: string) {
 
 		// check token 
-		if (!await this.tokenService.checkSession())
+		if (!await this.tokenService.checkSession()){
+			this.toastr.warning("Log in first", "");
 			return;
+		}
 
 		// action
 		try{

@@ -28,7 +28,7 @@ export class ViewVitrinaComponent implements OnInit {
 	constructor(
 		public searchService: SearchService,
 		public favoritesService: FavoritesService,
-		public cartService: CartService
+		public cartService: CartService,
 	) { }
 
 	ngOnInit(): void {

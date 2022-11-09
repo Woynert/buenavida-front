@@ -9,6 +9,8 @@ import { environment } from '@environment';
 
 export class TokenService {
 
+	activeSession: boolean = false;
+
 	constructor(
 		private http: HttpClient,
 	) { }
@@ -27,6 +29,7 @@ export class TokenService {
 			console.log("Checking Access token ...");
 			await this.http.get(`${environment.HOSTAPI}/session/ping`, options).toPromise();
 			console.log("Access token valid");
+			this.activeSession = true;
 			return true;
 		}
 		catch(e){
@@ -38,6 +41,7 @@ export class TokenService {
 			console.log("Trying to refresh ...");
 			await this.http.get(`${environment.HOSTAPI}/session/refresh`, options).toPromise();
 			console.log("Successfully refreshed");
+			this.activeSession = true;
 			return true;
 		}
 		catch(e){
@@ -45,6 +49,7 @@ export class TokenService {
 		}
 
 		// give up
+		this.activeSession = false;
 		return false;
 	}
 
