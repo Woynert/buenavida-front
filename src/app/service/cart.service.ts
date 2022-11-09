@@ -102,5 +102,8 @@ export class CartService {
 		this.calculateCart();
 	}
 
+	clearCart(): void {
+		localStorage.setItem('cart', JSON.stringify([]));
+	}
 	
 }

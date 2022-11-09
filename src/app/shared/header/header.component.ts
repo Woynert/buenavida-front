@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 
 import { SearchService, SearchResponse } from '@service/search.service';
 import { CartService } from '@service/cart.service';
+import { SessionService } from '@service/session.service';
+import { TokenService } from '@service/token.service';
 
 import { Product } from '@shared/interface';
 import { ProductsCart } from '@shared/ProductsCart';
@@ -31,6 +33,8 @@ export class HeaderComponent implements OnInit {
 	constructor(
 		public searchService: SearchService,
 		public cartService: CartService,
+		public sessionService: SessionService,
+		public tokenService: TokenService,
 		private router: Router
 	) {}
 
