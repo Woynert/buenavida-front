@@ -4,16 +4,16 @@
 
 	<div class="form_login">
 
-		<h1>Log In</h1>
+		<h1>Iniciar Sección</h1>
 
 		<div class="email_div">
 			<img class="img_login" src="/assets/icon/envelope-fill.svg">
-			<input type="email" class="email" [(ngModel)]="email" placeholder="Email" required>
+			<input type="email" class="email" [(ngModel)]="email" placeholder="Correo" required>
 		</div>
 		<p class="mesage_error" >{{error_email}}</p>
 		<div class="password_div">
 			<img class="img_login" src="/assets/icon/lock.svg">
-			<input type="password" [(ngModel)]="password" class="psw" placeholder="Password" required>
+			<input type="password" [(ngModel)]="password" class="psw" placeholder="Contraseña" required>
 		</div>
 		<p class="mesage_error">{{error_psw}}</p>
 		<div class="container_captcha">
@@ -21,17 +21,17 @@
 			<br>
 			<br>
 			<div class="input_captcha">
-				<input type="text" id="reCaptcha" name="reCaptcha" [(ngModel)]="reCaptcha" placeholder="Write the Captcha"/>
+				<input type="text" id="reCaptcha" name="reCaptcha" [(ngModel)]="reCaptcha" placeholder="Escribe el Captcha"/>
 			</div>
 		</div>
-		<p class="mesage_pass">{{pass_msg}}</p>
-		<div class="errmsg">{{error_captcha}}</div>
-		<button class="access" (click)="access()">Access</button>
-		<button class="access_facebook">Access with Facebook</button>
+		<p class="mesage_error">{{pass_msg}}</p>
+		<div class="mesage_error">{{error_captcha}}</div>
+		<button class="access" (click)="access()">Acceder</button>
+		<button class="access_facebook">Acceder con Facebook</button>
 		<div class="forget_password_div">
-			<a><p>Have you forgotten your password?</p></a>
+			<a><p>Olvidaste tu Contraseña?</p></a>
 		</div>
-		<p>Aren't you registered?<a routerLink="/signin" class="go_signup">Create an account</a></p>
+		<p>No te has registrado?<a routerLink="/signin" class="go_signup">Crear una cuenta</a></p>
 
 	</div>
 

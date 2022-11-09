@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef,HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { SearchService, SearchResponse } from '@service/search.service';
 import { CartService } from '@service/cart.service';
@@ -28,7 +29,9 @@ export class HeaderComponent implements OnInit {
 	public productsCart: ProductsCart[] = [];
 	public subtotal:number = 0;
 	public iva_include:number = 0;
-	public numbetChange:number = 0;
+	public numbetCart:number = 0;
+	public subscription: Subscription;
+
 
 	constructor(
 		public searchService: SearchService,
@@ -36,9 +39,14 @@ export class HeaderComponent implements OnInit {
 		public sessionService: SessionService,
 		public tokenService: TokenService,
 		private router: Router
-	) {}
+	) {
+		this.subscription = this.cartService.updateCart().subscribe(message => {
+			this.calculateCart();
+		});
+	}
 
 	ngOnInit(): void {
+		this.calculateCart();
 	}
 
 	focusSearchBar(): void {
@@ -70,16 +78,15 @@ export class HeaderComponent implements OnInit {
 		this.total_productos = this.cartService.total_productos;
 		this.subtotal = this.cartService.subtotal;
 		this.iva_include = this.cartService.iva_include;
+		this.numbetCart = this.cartService.total_productos;
 	}
 
 	quantityChange(quantity:number,product: Product): void {  
 		this.cartService.quantityChange(quantity,product);
-		this.calculateCart();
 	}
 
 	removeItemCart(product: Product): void {
 		this.cartService.removeItemCart(product);
-		this.calculateCart();
 	}
 
 	closeModalCart(): void {
@@ -89,5 +96,14 @@ export class HeaderComponent implements OnInit {
 	goCart(){
 		this.closeModalCart();
 		this.router.navigate(['/cart']);
+	}
+
+	async payment() {
+		await this.cartService.payment();
+		this.openModalCart();
+	}
+
+	listenerLocalStorage(){
+		alert("Local");
 	}
 }

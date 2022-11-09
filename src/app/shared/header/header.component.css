@@ -287,3 +287,21 @@
 	color: #000;
 	cursor: pointer;
 }
+
+/* badge */
+
+.badge {
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+  	color: #ffffff;
+  	font-weight: bolder;
+    background: rgb(39, 39, 39);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  	top: -6px;
+  	left: 15px;
+	font-size: 12px;
+}
