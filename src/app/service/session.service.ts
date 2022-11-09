@@ -5,6 +5,7 @@ import { environment } from '@environment';
 
 import { FavoritesService } from '@service/favorites.service';
 import { TokenService } from '@service/token.service';
+import { CartService } from '@service/cart.service';
 import { iUserInfo } from '@shared/interface';
 import { SignInI } from '@shared/signinI';
 import { LogInI } from '@shared/logInI';
@@ -19,6 +20,7 @@ export class SessionService {
 	constructor(
 		private http: HttpClient,
 		private favoritesService: FavoritesService,
+		private cartService: CartService,
 		private tokenService: TokenService
 	) { }
 
@@ -49,6 +51,22 @@ export class SessionService {
 			throw new Error("Unknow error");
 		}
 
+	}
+
+	async logOut() {
+		try{
+			const options = { withCredentials: true };
+			await this.http.delete(`${environment.HOSTAPI}/session/logout`, options).toPromise();
+
+			// clear cart
+			this.cartService.clearCart();
+
+			// reload
+			window.location.reload();
+		}
+		catch(e){
+			throw new Error("Couldn't log out");
+		}
 	}
 
 }

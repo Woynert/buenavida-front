@@ -112,6 +112,10 @@ export class CartService {
 		this.calculateCart();
 	}
 
+	clearCart(): void {
+		localStorage.setItem('cart', JSON.stringify([]));
+	}
+
 	async payment() {
 		if (!await this.tokenService.checkSession()){
 			this.toastr.error("Porfavo Iniciar Sección", '');
@@ -144,6 +148,5 @@ export class CartService {
 			this.toastr.error("Couldn't remove item from favorites", '');
 		}
 	}
-
 	
 }
