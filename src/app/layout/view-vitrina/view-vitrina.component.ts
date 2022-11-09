@@ -4,9 +4,10 @@ import { Subscription } from 'rxjs';
 import { Product, iEventApplyPriceFilter } from '@shared/interface';
 import { SearchService, SearchResponse } from '@service/search.service';
 import { FavoritesService } from '@service/favorites.service';
+import { CartService } from '@service/cart.service';
 
 import { iUserInfo } from '@shared/interface';
-import { CartService } from '@service/cart.service';
+import { ProductsCart } from '@shared/ProductsCart';
 
 @Component({
 	selector: 'app-view-vitrina',
@@ -20,6 +21,7 @@ export class ViewVitrinaComponent implements OnInit {
 
 	searchTermSubscription: Subscription = Subscription.EMPTY;
 	userInfoSubscription: Subscription = Subscription.EMPTY;
+	cartSubscription: Subscription = Subscription.EMPTY;
 
 	selectedProduct: Product | null = null;
 	products    : Product[] = [];
@@ -55,6 +57,14 @@ export class ViewVitrinaComponent implements OnInit {
 
 		// get user info if there is a session
 		this.favoritesService.fetchUserInfo();
+
+		// get cart changes
+		this.cartSubscription = this.cartService.updateCart().subscribe(message => {
+			this.cartService.calculateCart();
+			if (this.selectedProduct) this.selectProduct(this.selectedProduct);
+			console.log("CAMBIO");
+			console.log(this.selectedProduct);
+		});
 	}
 
 	// make search
@@ -131,9 +141,32 @@ export class ViewVitrinaComponent implements OnInit {
 	// product modal
 
 	selectProduct (product: Product){
+
+		if (!product)
+			return;
+
 		this.selectedProduct = product;
 
 		// set quantity
+		//
+		let productQuantity: number = 0;
+		const onCart: boolean = this.cartService.productsCart.some(
+			(pc: ProductsCart) => {
+				productQuantity = pc.quantity;
+				//console.log(pc);
+				return (pc.product._id == this.selectedProduct!._id)
+			});
+
+		console.log(productQuantity);
+
+		this.selectedProduct.onCart = onCart;
+
+		if (onCart && productQuantity){
+			this.selectedProduct.quantity = productQuantity;
+		}
+		else if (!this.selectedProduct.quantity){
+			this.selectedProduct.quantity = 1;
+		}
 
 		// check is already on cart
 		// 		get quantity

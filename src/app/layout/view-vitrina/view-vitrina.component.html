@@ -28,6 +28,7 @@
 											class="vitrina__item__favoriteIcon" src="/assets/icon/heart-fill.svg"
 										/>
 									</div>
+
 									<div *ngIf="product.discount > 0" class="vitrina__item__discount"><div>{{product.discount}}%</div></div>
 									<div class="vitrina__item__imgContainer">
 										<img class="vitrina__item__img" [src]="product.imageurl"/>
@@ -35,7 +36,7 @@
 									<div class="vitrina__item__title">{{product.title}}</div>
 									<div class="vitrina__item__units">{{product.units}}</div>
 									<div class="vitrina__item__price">{{product.price}} €</div>
-									<div class="vitrina__item__buyButton" (click)="addProduct(product)">
+									<div class="vitrina__item__buyButton" (click)="$event.stopPropagation(); addProduct(product)">
 										<img class="vitrina__item__favoriteIcon" src="/assets/icon/bag-plus-fill.svg"/>
 										Añadir a la cesta
 									</div>
@@ -70,23 +71,46 @@
 		</div>
 		<div class="modalProduct__descGrid">
 			<div class="modalProduct__body">
+
 				<div class="modalProduct__favoriteButton">
-					<img class="modalProduct__favoriteButton__icon" src="/assets/icon/heart.svg"/>
+
+					<!-- mostrar cuando esta en favoritos -->
+					<div
+						style="display: block !important;"
+						class="vitrina__item__favoriteButton">
+						<img
+							[style.display]="(!selectedProduct.favorite) ? 'block' : 'none'"
+							(click)="addToFavorites(selectedProduct._id)"
+							class="vitrina__item__favoriteIcon" src="/assets/icon/heart.svg"
+						/>
+						<img
+							[style.display]="(selectedProduct.favorite) ? 'block' : 'none'"
+							(click)="removeFromFavorites(selectedProduct._id)"
+							class="vitrina__item__favoriteIcon" src="/assets/icon/heart-fill.svg"
+						/>
+					</div>
+					<!--<img class="modalProduct__favoriteButton__icon" src="/assets/icon/heart.svg"/>-->
 				</div>
+
 				<div class="modalProduct__title">{{selectedProduct.title}}</div>
 				<div class="modalProduct__price">{{selectedProduct.price}} €</div>
 				<div class="modalProduct__content">{{selectedProduct.description}}</div>
 			</div>
 			<div class="modalProduct__bottom">
-				<input class="modalProduct__numeric" type="number" min="1" max="100" value="1">
+				<input class="modalProduct__numeric" type="number" min="1"
+					[(ngModel)]="selectedProduct.quantity"
+					(change)="this.cartService.quantityChange(selectedProduct.quantity, selectedProduct)"
+					>
+					<!--[disabled]="!selectedProduct.onCart"-->
 				<div class="modalProduct__bottomButtons">
 					<div
 						(click)="deselectProduct()"
 						class="modalProduct__closeButton">
 						Cerrar
 					</div>
+						<!--(click)="addProduct(selectedProduct)"-->
 					<div
-						(click)="addProduct(selectedProduct)"
+						(click)="this.cartService.addProduct(selectedProduct, selectedProduct.quantity)"
 						class="modalProduct__buyButton">
 						<img class="modalProduct__buyButton__icon" src="/assets/icon/bag-plus-fill.svg"/>
 						Añadir al carrito

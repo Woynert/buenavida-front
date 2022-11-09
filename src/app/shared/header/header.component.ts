@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
 	public subtotal:number = 0;
 	public iva_include:number = 0;
 	public numbetCart:number = 0;
-	public subscription: Subscription;
+	public subscription: Subscription = Subscription.EMPTY;;
 
 
 	constructor(
@@ -39,13 +39,12 @@ export class HeaderComponent implements OnInit {
 		public sessionService: SessionService,
 		public tokenService: TokenService,
 		private router: Router
-	) {
+	) { }
+
+	ngOnInit(): void {
 		this.subscription = this.cartService.updateCart().subscribe(message => {
 			this.calculateCart();
 		});
-	}
-
-	ngOnInit(): void {
 		this.calculateCart();
 	}
 

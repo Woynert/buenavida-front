@@ -9,7 +9,10 @@ export interface Product {
 	description:  string;
 	imageurl:     string;
 	score:        number;
+
 	favorite:     boolean;
+	quantity:     number;
+	onCart:       boolean;
 }
 
 // Vitrina apply price filter on product search
