@@ -91,7 +91,9 @@ export class HeaderComponent implements OnInit {
 		this.router.navigate(['/cart']);
 	}
 
-	payment(): void {
-		this.cartService.payment();
+	async payment() {
+		await this.cartService.payment();
+		this.cartService.clearCart();
+		this.openModalCart();
 	}
 }

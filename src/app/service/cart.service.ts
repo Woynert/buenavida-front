@@ -114,11 +114,11 @@ export class CartService {
 
 	clearCart(): void {
 		localStorage.setItem('cart', JSON.stringify([]));
+		this.calculateCart();
 	}
 
 	async payment() {
 		if (!await this.tokenService.checkSession()){
-			this.toastr.error("Porfavo Iniciar Sección", '');
 			return;
 		}
 
@@ -137,15 +137,15 @@ export class CartService {
 						}
 						products_payment.push(add_payment);
 					}
-					let asd = await this.http.post<MessageI>(
+					let message = await this.http.post<MessageI>(
 					`${environment.HOSTAPI}/payment`,products_payment, options).toPromise();
-					this.toastr.success('Item removed from favorites', '');
+					this.toastr.success('Pedido Realizado', '');
 				}
 			}
 			
 		}
 		catch(e){
-			this.toastr.error("Couldn't remove item from favorites", '');
+			this.toastr.error("No sew pudo realizar el pedido", '');
 		}
 	}
 	
