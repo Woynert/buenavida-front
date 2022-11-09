@@ -2,19 +2,19 @@
 
 <div class="content">
 	<div class="form_signup">
-		<h1>SignIn In</h1>
+		<h1>Registro</h1>
 
-		<h2>Create new account</h2>
-		<input type="text" id="name" class="input_signin" [(ngModel)]="name" placeholder="Name" required>
+		<h2>Crear Nueva Cuenta</h2>
+		<input type="text" id="name" class="input_signin" [(ngModel)]="name" placeholder="Nombre" required>
 		<p class="mesage_error" id="error_name">{{error_name}}</p>
-		<input type="text" id="lastname" class="input_signin" [(ngModel)]="lastname" placeholder="Lastname" required>
+		<input type="text" id="lastname" class="input_signin" [(ngModel)]="lastname" placeholder="Apellido" required>
 		<p class="mesage_error" id="error_lastname">{{error_lastname}}</p>
-		<h2>Login Information</h2>
-		<input type="email" id="email" class="input_signin" [(ngModel)]="email" placeholder="Email" required>
+		<h2>Información de Acceso</h2>
+		<input type="email" id="email" class="input_signin" [(ngModel)]="email" placeholder="Correo" required>
 		<p class="mesage_error" id="error_email">{{error_email}}</p>
-		<input type="password"  id="psw" class="input_signin" [(ngModel)]="password" placeholder="Password" required>
+		<input type="password"  id="psw" class="input_signin" [(ngModel)]="password" placeholder="Contraseña" required>
 		<p class="mesage_error" id="error_psw">{{error_password}}</p>
-		<input type="password"  id="confirm_psw" class="input_signin" [(ngModel)]="password_again" placeholder="Confirm Password" required>
+		<input type="password"  id="confirm_psw" class="input_signin" [(ngModel)]="password_again" placeholder="Confirme Contraseña" required>
 		<p class="mesage_error" id="error_confirm_psw">{{error_password_again}}</p>
 		<p class="mesage_pass" id="pass_validation">{{pass_msg}}</p>
 		<p class="mesage_pws" id="mesage_pws">{{mesage_pws}}</p>
@@ -24,14 +24,16 @@
 			<br>
 			<br>
 			<div class="input_captcha">
-				<input type="text" name="reCaptcha" id="reCaptcha" [(ngModel)]="reCaptcha" placeholder="Write the Captcha"/>
+				<input type="text" name="reCaptcha" id="reCaptcha" [(ngModel)]="reCaptcha" placeholder="Escribe el Captcha"/>
 			</div>
 
 		</div>
-		<div  class="errmsg">{{error_captcha}}</div>
+		<div  class="mesage_error">{{error_captcha}}</div>
 		<br>
-		<button class="access" (click)="access()">Access</button>
-		<br>
-		<button class="access_facebook">Access with Facebook</button>
+		<div class="div_buttons">
+			<button class="access" (click)="access()">Acceder</button>
+			<br>
+			<button class="access_facebook">Acceder con Facebook</button>
+		</div>
 	</div>
 </div>

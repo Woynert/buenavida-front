@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { CartService } from '@service/cart.service';
 
@@ -17,10 +18,15 @@ export class ViewCartComponent implements OnInit {
 	public subtotal:number = 0;
 	public iva_include:number = 0;
 	public numbetChange:number = 0;
+	public subscription: Subscription;
 
 	constructor(
 		public cartService: CartService
-	) { }
+	) {
+		this.subscription = this.cartService.updateCart().subscribe(message => {
+			this.calculateCart();
+		});
+	 }
 
 	ngOnInit(): void {
     	this.calculateCart();
@@ -36,17 +42,13 @@ export class ViewCartComponent implements OnInit {
 
 	quantityChange(quantity:number,product: Product): void {  
 		this.cartService.quantityChange(quantity,product);
-		this.calculateCart();
 	}
 
 	removeItemCart(product: Product): void {
 		this.cartService.removeItemCart(product);
-		this.calculateCart();
 	}
 
 	async payment() {
 		await this.cartService.payment();
-		this.cartService.clearCart();
-		this.calculateCart();
 	}
 }

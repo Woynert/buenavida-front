@@ -57,17 +57,17 @@ export class ViewLoginComponent implements OnInit {
 		}
 
 		if (this.email === '') {
-			this.error_email  = "Please enter your email";
+			this.error_email  = "Por favor ingrese un correo";
 			return;
 		}
 
 		else if (regex_email.test(this.email) == false){
-			this.error_email = "Please enter a valid email"
+			this.error_email = "Por favor ingrese un correo valido"
 			return;
 		}
 
 		if (this.password === '') {
-			this.error_psw = "Please enter your password";
+			this.error_psw = "Por favor ingrese una contraseña";
 			return;
 		}
 

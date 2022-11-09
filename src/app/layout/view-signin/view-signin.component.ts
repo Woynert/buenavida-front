@@ -25,7 +25,7 @@ export class ViewSigninComponent implements OnInit {
 	public error_password_again :string = "";
 	public password_again :string = "";
 	public pass_msg       :string = "";
-	public mesage_pws     :string = "Must have a minimum of 8 characters, at least one number, one special character, one uppercase letter and one lowercase letter";
+	public mesage_pws     :string = "Debe tener un mínimo de 8 caracteres, al menos un número, un carácter especial, una letra mayúscula y una letra minúscula";
 	public message        :string = "";
 	public signin         :boolean = false;
 
@@ -70,42 +70,42 @@ export class ViewSigninComponent implements OnInit {
 		}
 
 		if (this.name === '') {
-			this.error_name = "Please enter your name";
+			this.error_name = "Por favor ingrese el nombre";
 			return;
 		}
 
 		if (this.lastname === '') {
-			this.error_lastname = "Please enter your last name";
+			this.error_lastname = "Por favor ingrese el apellido";
 			return;
 		}
 
 		if (this.email === '') {
-			this.error_email = "Please enter your email";
+			this.error_email = "Por favor ingrese un correo";
 			return;
 		}
 
 		else if (regex_email.test(this.email) == false){
-			this.error_email = "Please enter a valid email";
+			this.error_email = "Por favor ingrese un correo valido";
 			return;
 		}
 
 		if (this.password === '') {
-			this.error_password = "Please enter your password";
+			this.error_password = "Por favor ingrese una contraseña";
 			return;
 		}
 
 		else if (regex_password.test(this.password) == false){
-			this.error_password = "Must have a minimum of 8 characters, at least one number, one special character, one uppercase letter and one lowercase letter";
+			this.error_password = "Debe tener un mínimo de 8 caracteres, al menos un número, un carácter especial, una letra mayúscula y una letra minúscula";
 			return;
 		}
 
 		if (this.password_again === '') {
-			this.error_password_again = "Please confirm your password";
+			this.error_password_again = "Por favor confirme la contraseña";
 			return;
 		}
 
 		else if (this.password != this.password_again) {
-			this.error_password_again = "Password fields are different";
+			this.error_password_again = "Las contraseñas son diferentes";
 			return;
 		}
 

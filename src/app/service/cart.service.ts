@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
 import { HttpClient } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
 
 import { ProductsCart } from '@shared/ProductsCart';
 import { Product } from '@shared/interface';
@@ -19,6 +20,7 @@ export class CartService {
 	public subtotal:number = 0;
 	public iva_include:number = 0;
 	public numbetChange:number = 0;
+	private subject = new Subject<any>();
 
 	constructor(
 		private tokenService: TokenService,
@@ -49,6 +51,7 @@ export class CartService {
 				products.push(quantity_product);
 			}
 			localStorage.setItem('cart', JSON.stringify(products));
+			this.subject.next('change');
 		} else {
 			let quantity_product = {
 				product: product,
@@ -56,6 +59,7 @@ export class CartService {
 			}
 			let products = [quantity_product];
 			localStorage.setItem('cart', JSON.stringify(products));
+			this.subject.next('change');
 		}
 	}
 
@@ -90,6 +94,7 @@ export class CartService {
 				}
 			}
 			localStorage.setItem('cart', JSON.stringify(products));
+			this.subject.next('change');
 		}
 		this.calculateCart();
 	}
@@ -107,6 +112,7 @@ export class CartService {
 			if (index != -1) {
 				products.splice(index, 1);
 				localStorage.setItem('cart', JSON.stringify(products));
+				this.subject.next('change');
 			}
 		}
 		this.calculateCart();
@@ -114,11 +120,13 @@ export class CartService {
 
 	clearCart(): void {
 		localStorage.setItem('cart', JSON.stringify([]));
+		this.subject.next('change');
 		this.calculateCart();
 	}
 
 	async payment() {
 		if (!await this.tokenService.checkSession()){
+			this.toastr.warning("Primero Inicie Sección", '');
 			return;
 		}
 
@@ -140,13 +148,20 @@ export class CartService {
 					let message = await this.http.post<MessageI>(
 					`${environment.HOSTAPI}/payment`,products_payment, options).toPromise();
 					this.toastr.success('Pedido Realizado', '');
+					this.clearCart();
+				} else {
+					this.toastr.warning("El carrito esta vacio", '');
 				}
 			}
 			
 		}
 		catch(e){
-			this.toastr.error("No sew pudo realizar el pedido", '');
+			this.toastr.warning("No se pudo realizar el pedido", '');
 		}
 	}
+
+	updateCart(): Observable<string> {
+        return this.subject.asObservable();
+    }
 	
 }

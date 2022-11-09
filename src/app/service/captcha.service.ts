@@ -33,10 +33,10 @@ export class CaptchaService {
 			}
 		}
 		if (recaptcha == "") {
-			this.message_error = "You must complete the Captcha";
+			this.message_error = "Debe completar el Captcha";
 			return false;
 		} else if (validateCaptcha > 0 || recaptcha.length > 6) {
-			this.message_error = "Incorrect captcha";
+			this.message_error = "Incorrecto Captcha";
 			return false;
 		} else {
 			return true;

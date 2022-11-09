@@ -63,6 +63,7 @@
 			<div class="headerButton__container" id="headerButton__cart" (click)="openModalCart()">
 				<div class="headerButton__icon">
 					<img src="/assets/icon/basket3.svg">
+					<span class="badge" *ngIf="(numbetCart)>0">{{numbetCart}}</span>
 				</div>
 				<div class="headerButton__label">Mi carrito</div>
 			</div>
