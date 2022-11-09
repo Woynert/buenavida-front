@@ -14,7 +14,6 @@ export class AppComponent implements OnInit{
 	) { }
 
 	ngOnInit(){
-		console.log("START")
 		this.tokenService.checkSession();
 	}
 }

@@ -20,7 +20,9 @@
 			*ngIf="tokenService.activeSession"
 			class="headerButton"
 			>
-			<div class="headerButton__container" id="headerButton__favorites">
+			<div
+				(click)="this.favoritesService.toggleViewingFavorites()"
+				class="headerButton__container" id="headerButton__favorites">
 				<div class="headerButton__icon">
 					<img src="/assets/icon/heart.svg">
 				</div>
