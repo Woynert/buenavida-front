@@ -66,8 +66,6 @@ export class ViewVitrinaComponent implements OnInit {
 			(message) => {
 				this.cartService.calculateCart();
 				if (this.selectedProduct) this.selectProduct(this.selectedProduct);
-				console.log("CAMBIO");
-				console.log(this.selectedProduct);
 			});
 
 		// viewing favorite changes
@@ -164,18 +162,16 @@ export class ViewVitrinaComponent implements OnInit {
 
 		this.selectedProduct = product;
 
-		// set quantity
-		//
+		// check is already on cart
 		let productQuantity: number = 0;
 		const onCart: boolean = this.cartService.productsCart.some(
 			(pc: ProductsCart) => {
 				productQuantity = pc.quantity;
-				//console.log(pc);
 				return (pc.product._id == this.selectedProduct!._id)
 			});
 
-		console.log(productQuantity);
 
+		// set quantity
 		this.selectedProduct.onCart = onCart;
 
 		if (onCart && productQuantity){
@@ -184,18 +180,10 @@ export class ViewVitrinaComponent implements OnInit {
 		else if (!this.selectedProduct.quantity){
 			this.selectedProduct.quantity = 1;
 		}
-
-		// check is already on cart
-		// 		get quantity
-		// else
-		// 		quantity = 1
-		//
 	}
 
 	deselectProduct (){
 		this.selectedProduct = null;
 	}
-
-	
 
 }

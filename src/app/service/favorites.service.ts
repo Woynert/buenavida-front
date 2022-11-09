@@ -92,12 +92,10 @@ export class FavoritesService {
 	toggleViewingFavorites() {
 		this.viewingFavorites = !this.viewingFavorites;
 		this.subjectViewingFavorites.next(this.viewingFavorites);
-		console.log(this.viewingFavorites);
 	}
 
 	getFavorites(pageId: number): Product[] {
 		if (this.currentUser){
-			console.log(this.currentUser.favorites);
 			return (this.currentUser.favorites.slice(pageId*12, (pageId+1)*12));
 		}
 		return [];
@@ -105,7 +103,6 @@ export class FavoritesService {
 
 	getFavoritesTotal(): number {
 		if (this.currentUser){
-			console.log(this.currentUser.favorites.length);
 			return (Math.ceil(this.currentUser.favorites.length / 12));
 		}
 		return 0;

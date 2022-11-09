@@ -81,14 +81,11 @@ export class CartService {
 	}
 
 	quantityChange(quantity:number, product: Product): void {  
-		console.log("quanti", quantity)
 		if (localStorage.getItem("cart") != null) {
 			let products = JSON.parse(localStorage.getItem("cart") || "")
 
-			//console.log(p.)
 			if (products.some((p: ProductsCart) => { return (p.product._id == product._id) }))
 			{
-				console.log("quanti", quantity)
 
 				for (let i = 0; i < products.length; i++) {
 					let element = products[i];
@@ -101,10 +98,6 @@ export class CartService {
 					}
 				}
 				localStorage.setItem('cart', JSON.stringify(products));
-			}
-			else{
-				console.log("XXXquanti", quantity)
-				//this.addProduct(quantity);
 			}
 
 			this.subject.next('change');
