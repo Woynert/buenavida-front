@@ -78,7 +78,7 @@ export class FavoritesService {
 			}
 		}
 		catch(e){
-			console.log(e);
+			console.log("Coulnd't fetch user info");
 		}
 	}
 }

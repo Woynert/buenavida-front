@@ -60,6 +60,7 @@ export class ViewVitrinaComponent implements OnInit {
 		.subscribe((res: SearchResponse) => {
 			this.products      = res.products;
 			this.totalPages    = Math.ceil(res.totalcount / 12); // 12 items per page
+			this.matchFavorites();
 		});
 	}
 
@@ -91,8 +92,9 @@ export class ViewVitrinaComponent implements OnInit {
 		this.matchFavorites();
 	}
 
+	// tag some products as favorite
+
 	matchFavorites() {
-		console.log("USER INFO UPDATED \n", this.favoritesService.currentUser);
 
 		if (!this.favoritesService.currentUser)
 			return;
@@ -116,8 +118,6 @@ export class ViewVitrinaComponent implements OnInit {
 			});
 		}
 
-
-		console.log(this.products);
 	}
 
 	addProduct(product: Product){
