@@ -6,7 +6,7 @@ import { Observable, Subject } from 'rxjs';
 
 import { TokenService } from '@service/token.service';
 import { MessageI } from '@shared/message';
-import { iUserInfo } from '@shared/interface';
+import { iUserInfo, Product } from '@shared/interface';
 
 @Injectable({
 	providedIn: 'root'
@@ -15,6 +15,9 @@ export class FavoritesService {
 
 	subjectUser: Subject<iUserInfo> = new Subject<iUserInfo>();
 	currentUser?: iUserInfo;
+
+	subjectViewingFavorites: Subject<boolean> = new Subject<boolean>();
+	viewingFavorites: boolean = false;
 
 	constructor(
 		private toastr: ToastrService,
@@ -82,5 +85,29 @@ export class FavoritesService {
 		catch(e){
 			console.log("Coulnd't fetch user info");
 		}
+	}
+
+	// vieweing favorites
+
+	toggleViewingFavorites() {
+		this.viewingFavorites = !this.viewingFavorites;
+		this.subjectViewingFavorites.next(this.viewingFavorites);
+		console.log(this.viewingFavorites);
+	}
+
+	getFavorites(pageId: number): Product[] {
+		if (this.currentUser){
+			console.log(this.currentUser.favorites);
+			return (this.currentUser.favorites.slice(pageId*12, (pageId+1)*12));
+		}
+		return [];
+	}
+
+	getFavoritesTotal(): number {
+		if (this.currentUser){
+			console.log(this.currentUser.favorites.length);
+			return (Math.ceil(this.currentUser.favorites.length / 12));
+		}
+		return 0;
 	}
 }

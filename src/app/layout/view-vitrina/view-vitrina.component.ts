@@ -22,14 +22,17 @@ export class ViewVitrinaComponent implements OnInit {
 	searchTermSubscription: Subscription = Subscription.EMPTY;
 	userInfoSubscription: Subscription = Subscription.EMPTY;
 	cartSubscription: Subscription = Subscription.EMPTY;
+	viewingFavoritesSubscription: Subscription = Subscription.EMPTY;
 
 	selectedProduct: Product | null = null;
-	products    : Product[] = [];
-	totalPages  : number  = 0;
-	searchTerm  : string = "";
-	selectedPage: number = 0;
-	minPrice: number = 0;
-	maxPrice: number = 1000;
+	products       : Product[] = [];
+
+	searchTerm: string = "";
+	minPrice  : number = 0;
+	maxPrice  : number = 1000;
+
+	totalPages      : number  = 0;
+	selectedPage    : number  = 0;
 
 	constructor(
 		public searchService: SearchService,
@@ -59,17 +62,31 @@ export class ViewVitrinaComponent implements OnInit {
 		this.favoritesService.fetchUserInfo();
 
 		// get cart changes
-		this.cartSubscription = this.cartService.updateCart().subscribe(message => {
-			this.cartService.calculateCart();
-			if (this.selectedProduct) this.selectProduct(this.selectedProduct);
-			console.log("CAMBIO");
-			console.log(this.selectedProduct);
-		});
+		this.cartSubscription = this.cartService.updateCart().subscribe(
+			(message) => {
+				this.cartService.calculateCart();
+				if (this.selectedProduct) this.selectProduct(this.selectedProduct);
+				console.log("CAMBIO");
+				console.log(this.selectedProduct);
+			});
+
+		// viewing favorite changes
+		this.viewingFavoritesSubscription = this.favoritesService.subjectViewingFavorites.subscribe(
+			(vf: boolean) => {
+				this.eventSelectPage(0);
+			});
 	}
 
 	// make search
 
 	getProductsFromSearch(): void {
+		if (this.favoritesService.viewingFavorites){
+			this.products = this.favoritesService.getFavorites(this.selectedPage);
+			this.totalPages = this.favoritesService.getFavoritesTotal();
+			this.matchFavorites();
+			return;
+		}
+
 		this.searchService.makeSearch(this.searchTerm, this.minPrice, this.maxPrice, this.selectedPage)
 		.subscribe((res: SearchResponse) => {
 			this.products      = res.products;

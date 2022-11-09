@@ -19,12 +19,12 @@
 										class="vitrina__item__favoriteButton">
 										<img
 											[style.display]="(!product.favorite) ? 'block' : 'none'"
-											(click)="addToFavorites(product._id)"
+											(click)="$event.stopPropagation(); addToFavorites(product._id)"
 											class="vitrina__item__favoriteIcon" src="/assets/icon/heart.svg"
 										/>
 										<img
 											[style.display]="(product.favorite) ? 'block' : 'none'"
-											(click)="removeFromFavorites(product._id)"
+											(click)="$event.stopPropagation(); removeFromFavorites(product._id)"
 											class="vitrina__item__favoriteIcon" src="/assets/icon/heart-fill.svg"
 										/>
 									</div>
@@ -89,7 +89,6 @@
 							class="vitrina__item__favoriteIcon" src="/assets/icon/heart-fill.svg"
 						/>
 					</div>
-					<!--<img class="modalProduct__favoriteButton__icon" src="/assets/icon/heart.svg"/>-->
 				</div>
 
 				<div class="modalProduct__title">{{selectedProduct.title}}</div>
@@ -101,14 +100,12 @@
 					[(ngModel)]="selectedProduct.quantity"
 					(change)="this.cartService.quantityChange(selectedProduct.quantity, selectedProduct)"
 					>
-					<!--[disabled]="!selectedProduct.onCart"-->
 				<div class="modalProduct__bottomButtons">
 					<div
 						(click)="deselectProduct()"
 						class="modalProduct__closeButton">
 						Cerrar
 					</div>
-						<!--(click)="addProduct(selectedProduct)"-->
 					<div
 						(click)="this.cartService.addProduct(selectedProduct, selectedProduct.quantity)"
 						class="modalProduct__buyButton">
