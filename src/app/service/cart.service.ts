@@ -72,7 +72,7 @@ export class CartService {
 			for (let i = 0; i < products.length; i++) {
 				let element = products[i];
 				total += element.quantity;
-				subtotal += element.quantity * element.product.price;
+				subtotal += element.quantity * (element.product.price * (1.0 - element.product.discount/100.0)) ;
 			}
 			this.total_productos = total;
 			this.subtotal = subtotal;
